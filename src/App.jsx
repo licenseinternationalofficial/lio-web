@@ -42,11 +42,11 @@ function App() {
         <Navbar />
         <main>
           <Hero />
+          <SearchLicense />
           <HowItWorks />
           <Pricing />
           <Requirements />
           <ApplicationForm />
-          <SearchLicense />
           <FAQ />
         </main>
         <Footer />
