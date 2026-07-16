@@ -43,6 +43,7 @@ body {
 .btn-primary:hover {
   background: var(--color-accent-dark);
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  transform: translateY(-1px);
 }
 
 .btn-outline {
@@ -56,11 +57,27 @@ body {
 .btn-outline:hover {
   background: var(--color-accent);
   color: white;
+  transform: translateY(-1px);
 }
 
-.credential-card {
-  background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
-  border: 1px solid #d1d9e6;
-  box-shadow: 0 4px 20px rgba(11, 29, 58, 0.08);
-  border-radius: 1rem;
+.card-hover {
+  transition: all 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(11, 29, 58, 0.1);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .sticky-mobile-cta {
+    padding-bottom: 72px;
+  }
 }

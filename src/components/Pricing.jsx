@@ -1,4 +1,4 @@
-import { Check, Star } from 'lucide-react'
+import { Check, Star, ShieldCheck } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useLang } from '../App'
 
@@ -6,33 +6,34 @@ const Pricing = () => {
   const { t } = useLang()
 
   return (
-    <section id="precios" className="py-24 bg-bg-section">
+    <section id="precios" className="py-16 sm:py-24 bg-bg-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <span className="text-accent-dark font-bold text-sm uppercase tracking-[0.2em]">Pricing</span>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12 sm:mb-16">
+          <span className="text-accent font-bold text-sm uppercase tracking-[0.2em]">Pricing</span>
           <h2 className="text-3xl md:text-4xl font-bold text-primary mt-3 mb-4">{t.pricing.title}</h2>
           <div className="w-16 h-1 bg-accent mx-auto rounded-full" />
           <p className="text-text-muted max-w-xl mx-auto mt-4">{t.pricing.subtitle}</p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto items-start">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto items-start">
           {t.pricing.plans.map((plan, index) => {
             const isPopular = index === 1
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.15 }}
                 viewport={{ once: true }}
-                className={`bg-white rounded-xl overflow-hidden flex flex-col relative ${isPopular ? 'ring-2 ring-accent shadow-xl shadow-accent/10 scale-105 z-10' : 'border border-primary-light shadow-md'}`}
+                whileHover={{ y: -4 }}
+                className={`bg-white rounded-xl overflow-hidden flex flex-col relative ${isPopular ? 'ring-2 ring-accent shadow-xl shadow-accent/10 md:scale-105 z-10' : 'border border-primary-light shadow-md card-hover'}`}
               >
                 {isPopular && (
-                  <div className="bg-accent text-primary text-center py-2 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1">
+                  <div className="bg-accent text-white text-center py-2 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1">
                     <Star size={14} fill="currentColor" /> {t.pricing.recommended}
                   </div>
                 )}
-                <div className="p-6">
+                <div className="p-5 sm:p-6">
                   <h3 className="text-lg font-bold text-primary mb-1">{plan.title}</h3>
                   <div className="flex items-baseline gap-1 mb-3">
                     <span className="text-3xl font-bold text-primary">{plan.price}</span>
@@ -48,7 +49,7 @@ const Pricing = () => {
                     ))}
                   </div>
                   <a href="#tramite" className={`block text-center py-3 rounded-lg font-semibold text-sm transition-all ${
-                    isPopular ? 'bg-accent text-primary hover:bg-accent-dark shadow-sm' : 'border border-primary text-primary hover:bg-primary hover:text-white'
+                    isPopular ? 'bg-accent text-white hover:bg-accent-dark shadow-sm' : 'border border-primary text-primary hover:bg-primary hover:text-white'
                   }`}>
                     {t.pricing.select}
                   </a>
@@ -57,6 +58,22 @@ const Pricing = () => {
             )
           })}
         </div>
+
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mt-8">
+          <div className="inline-flex items-center gap-2 bg-green-50 text-green-700 px-4 py-2 rounded-full text-xs font-semibold">
+            <ShieldCheck size={14} />
+            {t.pricing.garantia}
+          </div>
+        </motion.div>
+
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-center mt-4">
+          <p className="text-[10px] text-text-muted uppercase tracking-wider mb-3">{t.pricing.paymentText}</p>
+          <div className="flex flex-wrap justify-center gap-2">
+            {['Zelle', 'PayPal', 'Binance', 'Western Union', 'Avancemos'].map((m, i) => (
+              <span key={i} className="bg-white border border-primary-light text-primary font-semibold px-3 py-1.5 rounded text-[11px] shadow-sm">{m}</span>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   )

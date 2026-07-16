@@ -1,17 +1,18 @@
 import { Mail, Phone, MapPin } from 'lucide-react'
+import { motion } from 'framer-motion'
 import { useLang } from '../App'
 
 const Footer = () => {
   const { t } = useLang()
 
   return (
-    <footer className="bg-primary text-white py-14">
+    <footer className="bg-primary text-white py-12 sm:py-14">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
-          <div className="md:col-span-1">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 mb-10">
+          <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
-                <span className="text-primary font-bold text-sm">LIO</span>
+                <span className="text-white font-bold text-sm">LIO</span>
               </div>
               <div>
                 <span className="text-base font-bold text-white leading-none block">LIO</span>
@@ -47,7 +48,7 @@ const Footer = () => {
           <div>
             <h4 className="font-bold text-accent text-xs uppercase tracking-wider mb-4">{t.footer.contact}</h4>
             <div className="flex flex-col gap-3">
-              <a href="mailto:license.internationa.official@gmail.com" className="flex items-center gap-2.5 text-sm text-gray-400 hover:text-white transition-colors">
+              <a href="mailto:license.internationa.official@gmail.com" className="flex items-center gap-2.5 text-sm text-gray-400 hover:text-white transition-colors break-all">
                 <Mail size={14} className="text-accent shrink-0" /> license.internationa.official@gmail.com
               </a>
               <a href="tel:+584244296940" className="flex items-center gap-2.5 text-sm text-gray-400 hover:text-white transition-colors">
@@ -58,7 +59,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         <div className="pt-6 border-t border-white/10 text-center">
           <p className="text-xs text-gray-500">&copy; {new Date().getFullYear()} {t.footer.copyright}</p>

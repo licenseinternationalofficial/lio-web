@@ -8,7 +8,9 @@ export const translations = {
       subtitle: 'Obtén tu licencia internacional válida en más de 150 países. Proceso 100% digital, aprobado por la Convención de Ginebra 1949.',
       cta: 'Iniciar Solicitud',
       verify: 'Verificar Licencia',
-      stats: { paises: 'Países', respuesta: 'Respuesta', legal: 'Legal' }
+      stats: { paises: 'Países', respuesta: 'Respuesta', legal: 'Legal' },
+      urgeText: 'Más de 5,000 licencias emitidas — 98% de aprobación en 24h',
+      trustBadges: ['Avancemos', 'Zelle', 'PayPal', 'Binance', 'Western Union'],
     },
     how: {
       title: '¿Cómo Funciona?',
@@ -22,6 +24,8 @@ export const translations = {
       subtitle: 'Elige el plan que mejor se adapte a tus necesidades de viaje.',
       recommended: 'MÁS POPULAR',
       select: 'Seleccionar Plan',
+      garantia: 'Garantía de devolución 100% si no quedas satisfecho',
+      paymentText: 'Aceptamos todos los métodos de pago',
       plans: [
         { title: '1 Año', price: '$70', desc: 'Perfecto para viajes cortos.', features: ['Documento Digital + Físico', 'Válido en 150+ países', 'Soporte 24/7', 'Envío courier incluido'] },
         { title: '2 Años', price: '$100', desc: 'La opción favorita de nuestros usuarios.', features: ['Todo lo del plan 1 año', 'Envío prioritario', 'Descuento en renovación', 'Asesoría legal básica'] },
@@ -103,7 +107,52 @@ export const translations = {
       q2: { q: '¿Necesito mi licencia nacional vigente?', r: 'Sí, el permiso internacional es un complemento a tu licencia nacional. Debes portar AMBAS siempre.' },
       q3: { q: '¿Cuánto tiempo tarda el trámite?', r: 'El proceso completo toma entre 24 y 48 horas hábiles después de recibir tu documentación.' },
       q4: { q: '¿Cómo recibo mi permiso?', r: 'Recibes una copia digital por email y el documento físico por courier a tu domicilio.' },
-      q5: { q: '¿Puedo renovar mi permiso?', r: 'Sí, ofrecemos descuentos especiales para renovaciones antes del vencimiento.' }
+      q5: { q: '¿Puedo renovar mi permiso?', r: 'Sí, ofrecemos descuentos especiales para renovaciones antes del vencimiento.' },
+      q6: { q: '¿Es seguro compartir mis datos?', r: 'Absolutamente. Usamos encriptación SSL de grado bancario. Tus datos están protegidos y nunca compartidos con terceros.' },
+      q7: { q: '¿Qué pasa si mi solicitud es rechazada?', r: 'Si tu documentación no cumple los requisitos, te notificamos las correcciones necesarias. Si no podemos procesarla, te reembolsamos el 100%.' },
+      q8: { q: '¿Aceptan pagos internacionales?', r: 'Sí, aceptamos Zelle, PayPal, Binance, Western Union y depósitos bancarios en múltiples monedas.' },
+    },
+    testimonials: {
+      title: 'Lo Que Dicen',
+      titleAccent: 'Nuestros Clientes',
+      subtitle: 'Más de 5,000 conductores ya confían en LIO para su permiso internacional.',
+      items: [
+        { name: 'Carlos M.', country: 'México', rating: 5, text: 'Excelente servicio. En menos de 24h tenía mi permiso listo. Lo recomiendo ampliamente.' },
+        { name: 'María G.', country: 'Argentina', rating: 5, text: 'Muy profesional. Me ayudaron con la documentación y el proceso fue súper rápido.' },
+        { name: 'John D.', country: 'USA', rating: 5, text: 'Smooth process. Got my digital permit in 24 hours. Physical copy arrived 3 days later.' },
+        { name: 'Laura P.', country: 'España', rating: 5, text: 'Lo usé en mi viaje por Europa y funcionó perfecto en todos los países.' },
+        { name: 'Pedro R.', country: 'Colombia', rating: 5, text: 'El mejor precio que encontré. Atención personalizada y todo muy claro.' },
+        { name: 'Ana L.', country: 'Chile', rating: 5, text: 'Pensé que era complicado pero fue re fácil. En 3 pasos ya tenía mi licencia.' },
+      ]
+    },
+    trust: {
+      title: 'Tu Tranquilidad',
+      titleAccent: 'Está Garantizada',
+      subtitle: 'Por eso ofrecemos protección total en cada compra.',
+      guaranteeTitle: 'Garantía de Devolución',
+      guaranteeDesc: 'Si no quedas 100% satisfecho con tu permiso internacional, te devolvemos tu dinero. Sin preguntas.',
+      guaranteeCTA: 'Términos y Condiciones',
+      paymentTitle: 'Métodos de Pago',
+      paymentDesc: 'Aceptamos múltiples formas de pago seguras para tu comodidad.',
+      securityTitle: 'Tus Datos Seguros',
+      securityDesc: 'Cifrado SSL de grado bancario. Tus datos personales viajan protegidos.',
+      phoneTitle: 'Soporte Directo',
+      phoneDesc: 'Atención personalizada vía WhatsApp y correo electrónico.',
+    },
+    sticky: {
+      cta: 'Iniciar Solicitud',
+      text: '¡Envío gratis hoy!',
+    },
+    whatsapp: {
+      text: 'Hola, quiero información sobre el permiso internacional de conducir.',
+    },
+    counter: {
+      title: 'LIO en Números',
+      subtitle: 'Miles de conductores ya confían en nosotros.',
+      licenses: 'Licencias Emitidas',
+      countries: 'Países con Validez',
+      years: 'Años de Experiencia',
+      satisfaction: 'Satisfacción',
     },
     footer: {
       desc: 'License International Official (LIO) — Permiso Internacional de Conducir con validez global bajo la Convención de Ginebra 1949.',
@@ -125,7 +174,9 @@ export const translations = {
       subtitle: 'Get your international license valid in over 150 countries. 100% digital process, approved by the Geneva Convention 1949.',
       cta: 'Start Application',
       verify: 'Verify License',
-      stats: { paises: 'Countries', respuesta: 'Response', legal: 'Legal' }
+      stats: { paises: 'Countries', respuesta: 'Response', legal: 'Legal' },
+      urgeText: 'Over 5,000 licenses issued — 98% approval in 24h',
+      trustBadges: ['Avancemos', 'Zelle', 'PayPal', 'Binance', 'Western Union'],
     },
     how: {
       title: 'How It Works',
@@ -139,6 +190,8 @@ export const translations = {
       subtitle: 'Choose the plan that fits your travel needs.',
       recommended: 'MOST POPULAR',
       select: 'Select Plan',
+      garantia: '100% money-back guarantee if you\'re not satisfied',
+      paymentText: 'We accept all payment methods',
       plans: [
         { title: '1 Year', price: '$70', desc: 'Perfect for short trips.', features: ['Digital + Physical Document', 'Valid in 150+ countries', '24/7 Support', 'Courier delivery included'] },
         { title: '2 Years', price: '$100', desc: 'Our users\' favorite choice.', features: ['Everything in 1 year plan', 'Priority shipping', 'Renewal discount', 'Basic legal advice'] },
@@ -220,7 +273,52 @@ export const translations = {
       q2: { q: 'Do I need my valid national license?', r: 'Yes, the international permit complements your national license. Carry BOTH at all times.' },
       q3: { q: 'How long does the process take?', r: 'The complete process takes 24-48 business hours after receiving your documentation.' },
       q4: { q: 'How do I receive my permit?', r: 'You get a digital copy via email and the physical document via courier to your address.' },
-      q5: { q: 'Can I renew my permit?', r: 'Yes, we offer special discounts for renewals before expiry.' }
+      q5: { q: 'Can I renew my permit?', r: 'Yes, we offer special discounts for renewals before expiry.' },
+      q6: { q: 'Is my data safe?', r: 'Absolutely. We use bank-grade SSL encryption. Your data is protected and never shared with third parties.' },
+      q7: { q: 'What if my application is rejected?', r: 'If your documentation doesn\'t meet requirements, we notify you with corrections. If we can\'t process it, 100% refund.' },
+      q8: { q: 'Do you accept international payments?', r: 'Yes, we accept Zelle, PayPal, Binance, Western Union, and bank deposits in multiple currencies.' },
+    },
+    testimonials: {
+      title: 'What Our',
+      titleAccent: 'Clients Say',
+      subtitle: 'Over 5,000 drivers already trust LIO for their international permit.',
+      items: [
+        { name: 'Carlos M.', country: 'Mexico', rating: 5, text: 'Excellent service. Had my permit ready in under 24h. Highly recommend.' },
+        { name: 'Maria G.', country: 'Argentina', rating: 5, text: 'Very professional. They helped me with the documentation and the process was super fast.' },
+        { name: 'John D.', country: 'USA', rating: 5, text: 'Smooth process. Got my digital permit in 24 hours. Physical copy arrived 3 days later.' },
+        { name: 'Laura P.', country: 'Spain', rating: 5, text: 'Used it on my Europe trip and it worked perfectly in every country.' },
+        { name: 'Pedro R.', country: 'Colombia', rating: 5, text: 'Best price I found. Personalized attention and everything very clear.' },
+        { name: 'Ana L.', country: 'Chile', rating: 5, text: 'Thought it would be complicated but it was super easy. 3 steps and done.' },
+      ]
+    },
+    trust: {
+      title: 'Your Peace',
+      titleAccent: 'of Mind Is Guaranteed',
+      subtitle: 'That\'s why we offer total protection on every purchase.',
+      guaranteeTitle: 'Money-Back Guarantee',
+      guaranteeDesc: 'If you\'re not 100% satisfied with your international permit, we refund your money. No questions asked.',
+      guaranteeCTA: 'Terms & Conditions',
+      paymentTitle: 'Payment Methods',
+      paymentDesc: 'We accept multiple secure payment options for your convenience.',
+      securityTitle: 'Your Data Is Safe',
+      securityDesc: 'Bank-grade SSL encryption. Your personal data is protected in transit.',
+      phoneTitle: 'Direct Support',
+      phoneDesc: 'Personalized support via WhatsApp and email.',
+    },
+    sticky: {
+      cta: 'Apply Now',
+      text: 'Free shipping today!',
+    },
+    whatsapp: {
+      text: 'Hello, I want information about the international driving permit.',
+    },
+    counter: {
+      title: 'LIO by the Numbers',
+      subtitle: 'Thousands of drivers already trust us.',
+      licenses: 'Licenses Issued',
+      countries: 'Valid Countries',
+      years: 'Years of Experience',
+      satisfaction: 'Satisfaction',
     },
     footer: {
       desc: 'License International Official (LIO) — Global International Driving Permit under the Geneva Convention 1949.',

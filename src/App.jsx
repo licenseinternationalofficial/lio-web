@@ -1,13 +1,18 @@
 import { useState, createContext, useContext, useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
+import { UrgencyTopBar, StickyMobileCTA } from './components/UrgencyBar'
+import CounterSection from './components/CounterSection'
+import Testimonials from './components/Testimonials'
 import HowItWorks from './components/HowItWorks'
 import Pricing from './components/Pricing'
+import TrustBadges from './components/TrustBadges'
 import Requirements from './components/Requirements'
 import ApplicationForm from './components/ApplicationForm'
 import SearchLicense from './components/SearchLicense'
 import FAQ from './components/FAQ'
 import AdminPanel from './components/AdminPanel'
+import WhatsAppButton from './components/WhatsAppButton'
 import Footer from './components/Footer'
 import { translations } from './data/translations'
 
@@ -39,17 +44,23 @@ function App() {
   return (
     <LangContext.Provider value={{ lang, t, toggleLang }}>
       <div className="min-h-screen bg-white">
+        <UrgencyTopBar />
         <Navbar />
         <main>
           <Hero />
+          <CounterSection />
           <SearchLicense />
           <HowItWorks />
           <Pricing />
+          <TrustBadges />
+          <Testimonials />
           <Requirements />
           <ApplicationForm />
           <FAQ />
         </main>
         <Footer />
+        <WhatsAppButton />
+        <StickyMobileCTA />
       </div>
     </LangContext.Provider>
   )
