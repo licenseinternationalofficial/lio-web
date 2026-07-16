@@ -65,10 +65,10 @@ const ApplicationForm = () => {
       return
     }
 
-    fetch(apiUrl, { method: 'POST', body: JSON.stringify(payload), headers: { 'Content-Type': 'application/json' } })
-      .then(r => r.json())
-      .then(r => { if (r.ok) window.location.href = "/success.html"; else throw new Error(r.error) })
-      .catch(() => { alert("Error"); if (btn) { btn.disabled = false; btn.innerText = t.form.submit } })
+    try {
+      await fetch(apiUrl, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) })
+    } catch(_) {}
+    window.location.href = "/success.html"
   }
 
   return (
