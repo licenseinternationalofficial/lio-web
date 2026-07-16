@@ -7,7 +7,7 @@
 - **Dominio anterior (Netlify):** licenseinternationalofficial.netlify.app (sin créditos)
 
 ## Credenciales
-- **GitHub Token:** `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` (repo + workflow scope)
+- **GitHub Token:** `ghp_xxxx` (classic, repo + workflow scope — saved in AGENTS.md local)
 - **VITE_ADMIN_PASSWORD:** `LIO-ADMIN-2024`
 - **Google Sheets CSV (público):** `https://docs.google.com/spreadsheets/d/e/2PACX-1vQcLOEKNE8N8-dRiH9ZhFxxbpK59mSE8gc-Of1wya6QH6HuOQvs1l6pFnxM35HoUhUsOCI12p03n5YY/pub?output=csv`
 
@@ -104,7 +104,7 @@ lio-new/
 - [ ] Revisar PDF: asegurar que foto y watermark se vean bien
 - [ ] Dominio propio (opcional, ~$10/año)
 - [ ] Probar que la consulta de licencias funciona (depende del CSV de Google Sheets)
-- [ ] El token de GitHub vence? (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 es classic, no expira)
+- [ ] El token de GitHub vence? (classic, no expira)
 
 ## Comandos útiles
 ```bash
