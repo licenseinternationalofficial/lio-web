@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120">
+  <rect x="10" y="10" width="180" height="100" rx="10" fill="#003399"/>
+  <text x="100" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="white">FIA</text>
+  <text x="100" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#8ab4f8" font-weight="bold">FÉDÉRATION INTERNATIONALE</text>
+  <text x="100" y="94" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#8ab4f8" font-weight="bold">DE L'AUTOMOBILE</text>
+</svg>
