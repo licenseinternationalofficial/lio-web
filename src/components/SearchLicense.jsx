@@ -76,17 +76,15 @@ const SearchLicense = () => {
     const pw = doc.internal.pageSize.getWidth()
     const ph = doc.internal.pageSize.getHeight()
 
-    const img = new Image()
-    const loadPromise = new Promise(resolve => { img.onload = resolve; img.src = iaaLogo })
-    await loadPromise
-    const canvas = document.createElement('canvas')
-    canvas.width = img.width; canvas.height = img.height
-    const ctx = canvas.getContext('2d')
-    ctx.drawImage(img, 0, 0)
-    const dataUrl = canvas.toDataURL('image/png')
-    const iw = img.width; const ih = img.height
-    const wmW = 120; const wmH = (ih / iw) * wmW
-    doc.setGState(new GState({ opacity: 0.25 }))
+    const imgBlob = await fetch(iaaLogo).then(r => r.blob())
+    const dataUrl = await new Promise(resolve => {
+      const r = new FileReader(); r.onload = () => resolve(r.result); r.readAsDataURL(imgBlob)
+    })
+    const img = await new Promise(resolve => {
+      const i = new Image(); i.onload = () => resolve(i); i.src = dataUrl
+    })
+    const wmW = 100; const wmH = (img.height / img.width) * wmW
+    doc.setGState(new GState({ opacity: 0.2 }))
     doc.addImage(dataUrl, 'PNG', (pw - wmW) / 2, (ph - wmH) / 2, wmW, wmH)
     doc.setGState(new GState({ opacity: 1 }))
 
