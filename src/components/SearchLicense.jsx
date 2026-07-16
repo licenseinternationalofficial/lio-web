@@ -85,19 +85,22 @@ const SearchLicense = () => {
     ctx.drawImage(img, 0, 0)
     const dataUrl = canvas.toDataURL('image/png')
     const iw = img.width; const ih = img.height
-    const wmW = 130; const wmH = (ih / iw) * wmW
-    doc.setGState(new GState({ opacity: 0.12 }))
+    const wmW = 120; const wmH = (ih / iw) * wmW
+    doc.setGState(new GState({ opacity: 0.25 }))
     doc.addImage(dataUrl, 'PNG', (pw - wmW) / 2, (ph - wmH) / 2, wmW, wmH)
     doc.setGState(new GState({ opacity: 1 }))
+
+    const endorseText = lang === 'es' ? 'Avalado por IAA · ONU · FIA' : 'Endorsed by IAA · UN · FIA'
 
     doc.setFont('helvetica', 'bold')
     doc.setFontSize(16); doc.text('INTERNATIONAL DRIVING PERMIT', pw / 2, 20, { align: 'center' })
     doc.text('PERMISO INTERNACIONAL DE CONDUCIR', pw / 2, 28, { align: 'center' })
-    doc.setFontSize(10); doc.setFont('helvetica', 'normal')
-    doc.text('License International Official (LIO)', pw / 2, 36, { align: 'center' })
-    doc.text('Under the Geneva Convention on Road Traffic (1949)', pw / 2, 42, { align: 'center' })
+    doc.setFontSize(9); doc.setFont('helvetica', 'normal')
+    doc.text('IAA - License International Official', pw / 2, 36, { align: 'center' })
+    doc.setFontSize(8); doc.setFont('helvetica', 'bold')
+    doc.text(endorseText, pw / 2, 42, { align: 'center' })
     doc.setDrawColor(37, 99, 235); doc.setLineWidth(0.5)
-    doc.line(20, 48, pw - 20, 48)
+    doc.line(20, 47, pw - 20, 47)
     doc.setFontSize(11); doc.setFont('helvetica', 'bold')
     const fields = [
       ['1. Holder / Titular', result.nombre || ''],
@@ -112,7 +115,7 @@ const SearchLicense = () => {
       ['10. Valid Until / Válido Hasta', result.validoHasta || ''],
       ['11. Status / Estado', result.estado || ''],
     ]
-    let y = 56
+    let y = 55
     fields.forEach(([label, value]) => {
       doc.setFont('helvetica', 'bold'); doc.setFontSize(10)
       doc.text(label, 25, y); doc.setFont('helvetica', 'normal')
@@ -122,11 +125,11 @@ const SearchLicense = () => {
     doc.line(20, y + 5, pw - 20, y + 5); y += 14
     doc.setFontSize(8); doc.setFont('helvetica', 'italic')
     doc.text(lang === 'es'
-      ? 'Documento oficial. Debe portarse con su licencia original. Emitido por LIO.'
-      : 'Official document. Must be carried with your original license. Issued by LIO.',
+      ? 'Documento oficial. Debe portarse con su licencia original. Emitido por IAA - License International Official.'
+      : 'Official document. Must be carried with your original license. Issued by IAA - License International Official.',
       pw / 2, y, { align: 'center', maxWidth: 170 })
     doc.setFont('helvetica', 'normal'); doc.setFontSize(7)
-    doc.text('LIO - License International Official', pw / 2, 290, { align: 'center' })
+    doc.text(`IAA - License International Official — ${endorseText}`, pw / 2, 290, { align: 'center' })
     doc.save(`LIO-License-${result.id || result.id_tramite}.pdf`)
   }
 
