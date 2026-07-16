@@ -8,6 +8,7 @@
 
 ## Credenciales
 - **GitHub Token:** `ghp_xxxx` (classic, repo + workflow scope — saved in AGENTS.md local)
+- **Google Apps Script URL:** `https://script.google.com/macros/s/AKfycbwCOqCJuDGzvfzlb7iBdLccCDWcMtXB0MNPo2Gekr4n1VAE75iBsY2nvjCylPz2jqCi/exec`
 - **VITE_ADMIN_PASSWORD:** `LIO-ADMIN-2024`
 - **Google Sheets CSV (público):** `https://docs.google.com/spreadsheets/d/e/2PACX-1vQcLOEKNE8N8-dRiH9ZhFxxbpK59mSE8gc-Of1wya6QH6HuOQvs1l6pFnxM35HoUhUsOCI12p03n5YY/pub?output=csv`
 
@@ -100,7 +101,7 @@ lio-new/
 - [x] Title "IAA - License International Official"
 
 ## Pendiente
-- [ ] **Desplegar Google Apps Script** (crear script, pegar AppsScript.gs, autorizar, desplegar como web app, poner URL en VITE_FORM_API)
+- [x] **Desplegar Google Apps Script** (crear script, pegar AppsScript.gs, autorizar, desplegar como web app, poner URL en VITE_FORM_API)
 - [ ] Revisar PDF: asegurar que foto y watermark se vean bien
 - [ ] Dominio propio (opcional, ~$10/año)
 - [ ] Probar que la consulta de licencias funciona (depende del CSV de Google Sheets)
