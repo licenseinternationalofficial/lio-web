@@ -1,8 +1,8 @@
 function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents)
-    const folder = DriveApp.getFolderById('ID_DE_LA_CARPETA_DRIVE')
-    const sheet = SpreadsheetApp.openById('ID_DEL_SHEET')
+    const folder = DriveApp.getFolderById('1sAgajm3yoK2g0Y5w9a1ZqbnJGcWqWcac')
+    const sheet = SpreadsheetApp.openById('19tfesoT1l-k9ee2d9R2u-qmUUGNlkrQ-soPcltI21QI')
     const ws = sheet.getSheetByName('Aplicantes') || sheet.insertSheet('Aplicantes')
 
     if (ws.getLastRow() === 0) {
