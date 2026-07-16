@@ -1,9 +1,12 @@
-import { Check, Star, ShieldCheck } from 'lucide-react'
+import { Check, Star } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useLang } from '../App'
 
+const PHONE = '584244296940'
+
 const Pricing = () => {
-  const { t } = useLang()
+  const { t, lang } = useLang()
+  const whatsappMsg = encodeURIComponent(t.whatsapp.text)
 
   return (
     <section id="precios" className="py-16 sm:py-24 bg-bg-section">
@@ -33,14 +36,14 @@ const Pricing = () => {
                     <Star size={14} fill="currentColor" /> {t.pricing.recommended}
                   </div>
                 )}
-                <div className="p-5 sm:p-6">
+                <div className="p-5 sm:p-6 flex flex-col flex-1">
                   <h3 className="text-lg font-bold text-primary mb-1">{plan.title}</h3>
                   <div className="flex items-baseline gap-1 mb-3">
                     <span className="text-3xl font-bold text-primary">{plan.price}</span>
                     <span className="text-text-muted text-sm">USD</span>
                   </div>
                   <p className="text-sm text-text-muted mb-5">{plan.desc}</p>
-                  <div className="space-y-2.5 mb-6">
+                  <div className="space-y-2.5 mb-6 flex-1">
                     {plan.features.map((feature, fIndex) => (
                       <div key={fIndex} className="flex items-start gap-2.5">
                         <Check size={16} className="text-accent shrink-0 mt-0.5" />
@@ -48,9 +51,14 @@ const Pricing = () => {
                       </div>
                     ))}
                   </div>
-                  <a href="#tramite" className={`block text-center py-3 rounded-lg font-semibold text-sm transition-all ${
-                    isPopular ? 'bg-accent text-white hover:bg-accent-dark shadow-sm' : 'border border-primary text-primary hover:bg-primary hover:text-white'
-                  }`}>
+                  <a
+                    href={`https://wa.me/${PHONE}?text=${whatsappMsg}%20-%20${lang === 'es' ? 'Plan' : 'Plan'}:%20${plan.title}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`block text-center py-3 rounded-lg font-semibold text-sm transition-all ${
+                      isPopular ? 'bg-accent text-white hover:bg-accent-dark shadow-sm' : 'border border-primary text-primary hover:bg-primary hover:text-white'
+                    }`}
+                  >
                     {t.pricing.select}
                   </a>
                 </div>
@@ -58,22 +66,6 @@ const Pricing = () => {
             )
           })}
         </div>
-
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mt-8">
-          <div className="inline-flex items-center gap-2 bg-green-50 text-green-700 px-4 py-2 rounded-full text-xs font-semibold">
-            <ShieldCheck size={14} />
-            {t.pricing.garantia}
-          </div>
-        </motion.div>
-
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-center mt-4">
-          <p className="text-[10px] text-text-muted uppercase tracking-wider mb-3">{t.pricing.paymentText}</p>
-          <div className="flex flex-wrap justify-center gap-2">
-            {['Zelle', 'PayPal', 'Binance', 'Western Union', 'Avancemos'].map((m, i) => (
-              <span key={i} className="bg-white border border-primary-light text-primary font-semibold px-3 py-1.5 rounded text-[11px] shadow-sm">{m}</span>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   )

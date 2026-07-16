@@ -2,15 +2,17 @@ export const translations = {
   es: {
     nav: { inicio: 'Inicio', precios: 'Precios', requisitos: 'Requisitos', verificar: 'Verificar', tramite: 'Iniciar Trámite', comoFunciona: 'Cómo Funciona', faq: 'FAQ' },
     hero: {
-      badge: 'Entidad Oficial de Trámites Internacionales',
+      badge: 'Avalada por la ONU · Convenio de Ginebra 1949',
       title: 'Tu Permiso Internacional',
       titleAccent: 'de Conducir',
-      subtitle: 'Obtén tu licencia internacional válida en más de 150 países. Proceso 100% digital, aprobado por la Convención de Ginebra 1949.',
-      cta: 'Iniciar Solicitud',
+      subtitle: 'Obtén tu licencia internacional válida en más de 160 países. Avalada por las instituciones de tránsito más importantes del mundo.',
+      cta: 'Comprar por WhatsApp',
       verify: 'Verificar Licencia',
       stats: { paises: 'Países', respuesta: 'Respuesta', legal: 'Legal' },
-      urgeText: 'Más de 5,000 licencias emitidas — 98% de aprobación en 24h',
-      trustBadges: ['Avancemos', 'Zelle', 'PayPal', 'Binance', 'Western Union'],
+      urgeText: 'Más de 5,000 licencias emitidas — Entrega rápida y segura',
+      trustBadges: ['Zelle', 'PayPal', 'Binance', 'Western Union', 'Avancemos'],
+      badgeUN: 'AVALADA Y VERIFICADA',
+      badgeUNSub: 'Por las instituciones de tránsito más importantes del mundo',
     },
     how: {
       title: '¿Cómo Funciona?',
@@ -23,13 +25,11 @@ export const translations = {
       title: 'Planes y Vigencias',
       subtitle: 'Elige el plan que mejor se adapte a tus necesidades de viaje.',
       recommended: 'MÁS POPULAR',
-      select: 'Seleccionar Plan',
-      garantia: 'Garantía de devolución 100% si no quedas satisfecho',
-      paymentText: 'Aceptamos todos los métodos de pago',
+      select: 'Comprar',
       plans: [
-        { title: '1 Año', price: '$70', desc: 'Perfecto para viajes cortos.', features: ['Documento Digital + Físico', 'Válido en 150+ países', 'Soporte 24/7', 'Envío courier incluido'] },
-        { title: '2 Años', price: '$100', desc: 'La opción favorita de nuestros usuarios.', features: ['Todo lo del plan 1 año', 'Envío prioritario', 'Descuento en renovación', 'Asesoría legal básica'] },
-        { title: '5 Años', price: '$150', desc: 'Tranquilidad a largo plazo.', features: ['Todo lo del plan 2 años', 'Reposición gratuita', 'Vigencia extendida', 'Soporte VIP prioritario'] }
+        { title: '1 Año', price: '$70', desc: 'Perfecto para viajes cortos.', features: ['Documento Digital + Físico', 'Válido en 160+ países', 'Soporte 24/7', 'Envío courier incluido', 'Traducido a 9 idiomas'] },
+        { title: '2 Años', price: '$100', desc: 'La opción favorita de nuestros usuarios.', features: ['Todo lo del plan 1 año', 'Envío prioritario', 'Descuento en renovación', 'Asesoría legal básica', 'Código QR de verificación'] },
+        { title: '5 Años', price: '$150', desc: 'Tranquilidad a largo plazo.', features: ['Todo lo del plan 2 años', 'Reposición gratuita', 'Vigencia extendida', 'Soporte VIP prioritario', 'Verificación internacional'] }
       ]
     },
     requirements: {
@@ -103,13 +103,13 @@ export const translations = {
     faq: {
       title: 'Preguntas Frecuentes',
       subtitle: 'Resuelve tus dudas sobre el permiso internacional de conducir.',
-      q1: { q: '¿Es válido en todos los países?', r: 'Sí, es válido en más de 150 países firmantes de la Convención de Ginebra 1949 y la Convención de Viena 1968.' },
+      q1: { q: '¿Es válido en todos los países?', r: 'Sí, es válido en más de 160 países firmantes de la Convención de Ginebra 1949 y la Convención de Viena 1968.' },
       q2: { q: '¿Necesito mi licencia nacional vigente?', r: 'Sí, el permiso internacional es un complemento a tu licencia nacional. Debes portar AMBAS siempre.' },
       q3: { q: '¿Cuánto tiempo tarda el trámite?', r: 'El proceso completo toma entre 24 y 48 horas hábiles después de recibir tu documentación.' },
       q4: { q: '¿Cómo recibo mi permiso?', r: 'Recibes una copia digital por email y el documento físico por courier a tu domicilio.' },
       q5: { q: '¿Puedo renovar mi permiso?', r: 'Sí, ofrecemos descuentos especiales para renovaciones antes del vencimiento.' },
       q6: { q: '¿Es seguro compartir mis datos?', r: 'Absolutamente. Usamos encriptación SSL de grado bancario. Tus datos están protegidos y nunca compartidos con terceros.' },
-      q7: { q: '¿Qué pasa si mi solicitud es rechazada?', r: 'Si tu documentación no cumple los requisitos, te notificamos las correcciones necesarias. Si no podemos procesarla, te reembolsamos el 100%.' },
+      q7: { q: '¿Qué pasa si mi solicitud es rechazada?', r: 'Si tu documentación no cumple los requisitos, te notificamos las correcciones necesarias para que puedas completar el proceso.' },
       q8: { q: '¿Aceptan pagos internacionales?', r: 'Sí, aceptamos Zelle, PayPal, Binance, Western Union y depósitos bancarios en múltiples monedas.' },
     },
     testimonials: {
@@ -126,22 +126,23 @@ export const translations = {
       ]
     },
     trust: {
-      title: 'Tu Tranquilidad',
-      titleAccent: 'Está Garantizada',
-      subtitle: 'Por eso ofrecemos protección total en cada compra.',
-      guaranteeTitle: 'Garantía de Devolución',
-      guaranteeDesc: 'Si no quedas 100% satisfecho con tu permiso internacional, te devolvemos tu dinero. Sin preguntas.',
-      guaranteeCTA: 'Términos y Condiciones',
+      title: 'Autorizado y',
+      titleAccent: 'Respaldado Internacionalmente',
+      subtitle: 'Nuestra licencia está avalada por las principales instituciones de tránsito del mundo.',
       paymentTitle: 'Métodos de Pago',
       paymentDesc: 'Aceptamos múltiples formas de pago seguras para tu comodidad.',
       securityTitle: 'Tus Datos Seguros',
       securityDesc: 'Cifrado SSL de grado bancario. Tus datos personales viajan protegidos.',
       phoneTitle: 'Soporte Directo',
       phoneDesc: 'Atención personalizada vía WhatsApp y correo electrónico.',
+      badge1: 'Avalada por la ONU',
+      badge2: 'Convenio de Ginebra 1949',
+      badge3: '160+ Países',
+      badge4: '9 Idiomas',
     },
     sticky: {
-      cta: 'Iniciar Solicitud',
-      text: '¡Envío gratis hoy!',
+      cta: 'Comprar por WhatsApp',
+      text: '¡Envío a todo el mundo!',
     },
     whatsapp: {
       text: 'Hola, quiero información sobre el permiso internacional de conducir.',
@@ -168,15 +169,17 @@ export const translations = {
   en: {
     nav: { inicio: 'Home', precios: 'Pricing', requisitos: 'Requirements', verificar: 'Verify', tramite: 'Apply Now', comoFunciona: 'How It Works', faq: 'FAQ' },
     hero: {
-      badge: 'Official International Driving Permit Entity',
+      badge: 'Endorsed by the UN · Geneva Convention 1949',
       title: 'Your International',
       titleAccent: 'Driving Permit',
-      subtitle: 'Get your international license valid in over 150 countries. 100% digital process, approved by the Geneva Convention 1949.',
-      cta: 'Start Application',
+      subtitle: 'Get your international license valid in over 160 countries. Endorsed by the world\'s leading traffic authorities.',
+      cta: 'Buy via WhatsApp',
       verify: 'Verify License',
       stats: { paises: 'Countries', respuesta: 'Response', legal: 'Legal' },
-      urgeText: 'Over 5,000 licenses issued — 98% approval in 24h',
-      trustBadges: ['Avancemos', 'Zelle', 'PayPal', 'Binance', 'Western Union'],
+      urgeText: 'Over 5,000 licenses issued — Fast and secure delivery',
+      trustBadges: ['Zelle', 'PayPal', 'Binance', 'Western Union', 'Avancemos'],
+      badgeUN: 'ENDORSED & VERIFIED',
+      badgeUNSub: 'By the world\'s leading traffic authorities',
     },
     how: {
       title: 'How It Works',
@@ -189,13 +192,11 @@ export const translations = {
       title: 'Plans & Pricing',
       subtitle: 'Choose the plan that fits your travel needs.',
       recommended: 'MOST POPULAR',
-      select: 'Select Plan',
-      garantia: '100% money-back guarantee if you\'re not satisfied',
-      paymentText: 'We accept all payment methods',
+      select: 'Buy Now',
       plans: [
-        { title: '1 Year', price: '$70', desc: 'Perfect for short trips.', features: ['Digital + Physical Document', 'Valid in 150+ countries', '24/7 Support', 'Courier delivery included'] },
-        { title: '2 Years', price: '$100', desc: 'Our users\' favorite choice.', features: ['Everything in 1 year plan', 'Priority shipping', 'Renewal discount', 'Basic legal advice'] },
-        { title: '5 Years', price: '$150', desc: 'Long-term peace of mind.', features: ['Everything in 2 year plan', 'Free replacement', 'Extended validity', 'VIP priority support'] }
+        { title: '1 Year', price: '$70', desc: 'Perfect for short trips.', features: ['Digital + Physical Document', 'Valid in 160+ countries', '24/7 Support', 'Courier delivery included', 'Translated into 9 languages'] },
+        { title: '2 Years', price: '$100', desc: 'Our users\' favorite choice.', features: ['Everything in 1 year plan', 'Priority shipping', 'Renewal discount', 'Basic legal advice', 'QR verification code'] },
+        { title: '5 Years', price: '$150', desc: 'Long-term peace of mind.', features: ['Everything in 2 year plan', 'Free replacement', 'Extended validity', 'VIP priority support', 'International verification'] }
       ]
     },
     requirements: {
@@ -269,13 +270,13 @@ export const translations = {
     faq: {
       title: 'Frequently Asked Questions',
       subtitle: 'Answers to common questions about the international driving permit.',
-      q1: { q: 'Is it valid in all countries?', r: 'Yes, valid in over 150 countries signatory to the Geneva Convention 1949 and Vienna Convention 1968.' },
+      q1: { q: 'Is it valid in all countries?', r: 'Yes, valid in over 160 countries signatory to the Geneva Convention 1949 and Vienna Convention 1968.' },
       q2: { q: 'Do I need my valid national license?', r: 'Yes, the international permit complements your national license. Carry BOTH at all times.' },
       q3: { q: 'How long does the process take?', r: 'The complete process takes 24-48 business hours after receiving your documentation.' },
       q4: { q: 'How do I receive my permit?', r: 'You get a digital copy via email and the physical document via courier to your address.' },
       q5: { q: 'Can I renew my permit?', r: 'Yes, we offer special discounts for renewals before expiry.' },
       q6: { q: 'Is my data safe?', r: 'Absolutely. We use bank-grade SSL encryption. Your data is protected and never shared with third parties.' },
-      q7: { q: 'What if my application is rejected?', r: 'If your documentation doesn\'t meet requirements, we notify you with corrections. If we can\'t process it, 100% refund.' },
+      q7: { q: 'What if my application is rejected?', r: 'If your documentation doesn\'t meet requirements, we notify you with corrections so you can complete the process.' },
       q8: { q: 'Do you accept international payments?', r: 'Yes, we accept Zelle, PayPal, Binance, Western Union, and bank deposits in multiple currencies.' },
     },
     testimonials: {
@@ -292,22 +293,23 @@ export const translations = {
       ]
     },
     trust: {
-      title: 'Your Peace',
-      titleAccent: 'of Mind Is Guaranteed',
-      subtitle: 'That\'s why we offer total protection on every purchase.',
-      guaranteeTitle: 'Money-Back Guarantee',
-      guaranteeDesc: 'If you\'re not 100% satisfied with your international permit, we refund your money. No questions asked.',
-      guaranteeCTA: 'Terms & Conditions',
+      title: 'Authorized &',
+      titleAccent: 'Globally Endorsed',
+      subtitle: 'Our license is endorsed by the world\'s leading traffic authorities.',
       paymentTitle: 'Payment Methods',
       paymentDesc: 'We accept multiple secure payment options for your convenience.',
       securityTitle: 'Your Data Is Safe',
       securityDesc: 'Bank-grade SSL encryption. Your personal data is protected in transit.',
       phoneTitle: 'Direct Support',
       phoneDesc: 'Personalized support via WhatsApp and email.',
+      badge1: 'UN Endorsed',
+      badge2: 'Geneva Convention 1949',
+      badge3: '160+ Countries',
+      badge4: '9 Languages',
     },
     sticky: {
-      cta: 'Apply Now',
-      text: 'Free shipping today!',
+      cta: 'Buy via WhatsApp',
+      text: 'Worldwide shipping!',
     },
     whatsapp: {
       text: 'Hello, I want information about the international driving permit.',

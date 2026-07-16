@@ -1,4 +1,4 @@
-import { ShieldCheck, CreditCard, Lock, Phone } from 'lucide-react'
+import { CreditCard, Lock, Phone, Award } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useLang } from '../App'
 
@@ -9,7 +9,7 @@ const TrustBadges = () => {
     <section className="py-16 sm:py-24 bg-bg-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12 sm:mb-16">
-          <span className="text-accent font-bold text-sm uppercase tracking-[0.2em]">Trust</span>
+          <span className="text-accent font-bold text-sm uppercase tracking-[0.2em]">Authority</span>
           <h2 className="text-3xl md:text-4xl font-bold text-primary mt-3 mb-4">
             {t.trust.title} <span className="text-accent">{t.trust.titleAccent}</span>
           </h2>
@@ -17,21 +17,16 @@ const TrustBadges = () => {
           <p className="text-text-muted max-w-xl mx-auto mt-4">{t.trust.subtitle}</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0 }}
-            viewport={{ once: true }}
-            className="bg-white rounded-xl p-6 border border-primary-light text-center card-hover"
-          >
-            <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center mx-auto mb-4">
-              <ShieldCheck size={24} className="text-green-700" />
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex flex-wrap justify-center gap-3 mb-12">
+          {[t.trust.badge1, t.trust.badge2, t.trust.badge3, t.trust.badge4].map((b, i) => (
+            <div key={i} className="bg-white border border-primary-light rounded-lg px-4 py-2 shadow-sm flex items-center gap-2">
+              <Award size={14} className="text-accent" />
+              <span className="text-primary font-semibold text-xs">{b}</span>
             </div>
-            <h3 className="font-bold text-primary text-sm mb-2">{t.trust.guaranteeTitle}</h3>
-            <p className="text-xs text-text-muted leading-relaxed">{t.trust.guaranteeDesc}</p>
-          </motion.div>
+          ))}
+        </motion.div>
 
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

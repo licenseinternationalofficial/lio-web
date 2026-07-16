@@ -23,39 +23,39 @@ const Navbar = () => {
   ]
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'glass shadow-sm py-2' : 'bg-primary py-3'}`}>
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-primary shadow-lg shadow-black/20 py-2' : 'bg-primary py-3'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         <a href="#" className="flex items-center gap-3">
-          <div className={`${isScrolled ? 'bg-primary' : 'bg-accent'} w-9 h-9 rounded-lg flex items-center justify-center shadow-sm transition-colors`}>
-            <span className={`font-bold text-base ${isScrolled ? 'text-accent' : 'text-white'}`}>LIO</span>
+          <div className="bg-accent w-9 h-9 rounded-lg flex items-center justify-center shadow-sm">
+            <span className="text-white font-bold text-base">LIO</span>
           </div>
           <div>
-            <span className={`text-base font-bold leading-none block ${isScrolled ? 'text-primary' : 'text-white'}`}>LIO</span>
-            <span className={`text-[8px] uppercase tracking-[0.2em] font-medium leading-none block ${isScrolled ? 'text-text-muted' : 'text-gray-400'}`}>Oficial</span>
+            <span className="text-white text-base font-bold leading-none block">LIO</span>
+            <span className="text-gray-400 text-[8px] uppercase tracking-[0.2em] font-medium leading-none block">License International Official</span>
           </div>
         </a>
 
         <div className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
-            <a key={link.name} href={link.href} className={`font-medium text-sm transition-colors ${isScrolled ? 'text-text-muted hover:text-primary' : 'text-gray-300 hover:text-white'}`}>
+            <a key={link.name} href={link.href} className="font-medium text-sm text-gray-300 hover:text-white transition-colors">
               {link.name}
             </a>
           ))}
-          <button onClick={toggleLang} className={`flex items-center gap-1.5 text-sm font-semibold transition-colors border rounded-lg px-3 py-1.5 ${isScrolled ? 'text-primary border-primary-light hover:bg-primary-light' : 'text-white border-white/30 hover:bg-white/10'}`} aria-label="Toggle language">
+          <button onClick={toggleLang} className="flex items-center gap-1.5 text-sm font-semibold text-white border border-white/30 rounded-lg px-3 py-1.5 hover:bg-white/10 transition-colors" aria-label="Toggle language">
             <Globe size={14} />
             {lang === 'es' ? 'EN' : 'ES'}
           </button>
-          <a href="#tramite" className={`font-semibold text-sm px-5 py-2.5 rounded-lg transition-all ${isScrolled ? 'bg-accent text-white hover:bg-accent-dark shadow-sm' : 'bg-accent text-white hover:bg-accent-dark shadow-sm'}`}>
+          <a href="#tramite" className="font-semibold text-sm px-5 py-2.5 rounded-lg bg-accent text-white hover:bg-accent-dark transition-all shadow-sm">
             {t.nav.tramite}
           </a>
         </div>
 
         <div className="flex items-center gap-2 md:hidden">
-          <button onClick={toggleLang} className={`flex items-center gap-1.5 text-sm font-semibold border rounded-lg px-3 py-1.5 ${isScrolled ? 'text-primary border-primary-light' : 'text-white border-white/30'}`}>
+          <button onClick={toggleLang} className="flex items-center gap-1.5 text-sm font-semibold text-white border border-white/30 rounded-lg px-3 py-1.5">
             <Globe size={14} />
             {lang === 'es' ? 'EN' : 'ES'}
           </button>
-          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={isScrolled ? 'text-primary p-1' : 'text-white p-1'} aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}>
+          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-white p-1" aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}>
             {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
@@ -67,11 +67,11 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white shadow-lg overflow-hidden"
+            className="md:hidden bg-primary overflow-hidden shadow-xl"
           >
-            <div className="flex flex-col items-center gap-5 py-6 px-4 border-t border-primary-light">
+            <div className="flex flex-col items-center gap-5 py-6 px-4 border-t border-white/10">
               {navLinks.map((link) => (
-                <a key={link.name} href={link.href} className="text-base font-medium text-primary" onClick={() => setIsMobileMenuOpen(false)}>
+                <a key={link.name} href={link.href} className="text-base font-medium text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>
                   {link.name}
                 </a>
               ))}
