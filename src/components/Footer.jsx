@@ -12,10 +12,10 @@ const Footer = () => {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 mb-10">
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
-              <img src={iaaLogo} alt="IAA" className="h-10 w-auto brightness-0 invert" />
-              <div>
-                <span className="text-sm font-bold text-white leading-none block">International Automobile Association</span>
-                <span className="text-[8px] text-gray-400 uppercase tracking-[0.2em] font-medium leading-none block">License International Official</span>
+              <img src={iaaLogo} alt="IAA" className="h-10 w-auto" />
+              <div className="leading-tight">
+                <span className="text-sm font-bold text-white block">International Automobile Association</span>
+                <span className="text-[9px] text-gray-400 uppercase tracking-[0.2em] font-medium block">License International Official</span>
               </div>
             </div>
             <p className="text-sm text-gray-400 leading-relaxed mb-5">{t.footer.desc}</p>
