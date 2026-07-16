@@ -4,6 +4,7 @@ import Hero from './components/Hero'
 import { UrgencyTopBar, StickyMobileCTA } from './components/UrgencyBar'
 import CounterSection from './components/CounterSection'
 import Testimonials from './components/Testimonials'
+import DocumentShowcase from './components/DocumentShowcase'
 import HowItWorks from './components/HowItWorks'
 import Pricing from './components/Pricing'
 import TrustBadges from './components/TrustBadges'
@@ -54,6 +55,7 @@ function App() {
           <Pricing />
           <TrustBadges />
           <Testimonials />
+          <DocumentShowcase />
           <Requirements />
           <ApplicationForm />
           <FAQ />

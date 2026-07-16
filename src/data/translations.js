@@ -6,7 +6,7 @@ export const translations = {
       title: 'Tu Permiso Internacional',
       titleAccent: 'de Conducir',
       subtitle: 'Obtén tu licencia internacional válida en más de 160 países. Avalada por las instituciones de tránsito más importantes del mundo.',
-      cta: 'Comprar por WhatsApp',
+      cta: 'Iniciar Solicitud',
       verify: 'Verificar Licencia',
       stats: { paises: 'Países', respuesta: 'Respuesta', legal: 'Legal' },
       urgeText: 'Más de 5,000 licencias emitidas — Entrega rápida y segura',
@@ -141,7 +141,7 @@ export const translations = {
       badge4: '9 Idiomas',
     },
     sticky: {
-      cta: 'Comprar por WhatsApp',
+      cta: 'Iniciar Solicitud',
       text: '¡Envío a todo el mundo!',
     },
     whatsapp: {
@@ -173,7 +173,7 @@ export const translations = {
       title: 'Your International',
       titleAccent: 'Driving Permit',
       subtitle: 'Get your international license valid in over 160 countries. Endorsed by the world\'s leading traffic authorities.',
-      cta: 'Buy via WhatsApp',
+      cta: 'Start Application',
       verify: 'Verify License',
       stats: { paises: 'Countries', respuesta: 'Response', legal: 'Legal' },
       urgeText: 'Over 5,000 licenses issued — Fast and secure delivery',
@@ -308,7 +308,7 @@ export const translations = {
       badge4: '9 Languages',
     },
     sticky: {
-      cta: 'Buy via WhatsApp',
+      cta: 'Apply Now',
       text: 'Worldwide shipping!',
     },
     whatsapp: {

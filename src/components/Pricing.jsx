@@ -2,11 +2,8 @@ import { Check, Star } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useLang } from '../App'
 
-const PHONE = '584244296940'
-
 const Pricing = () => {
-  const { t, lang } = useLang()
-  const whatsappMsg = encodeURIComponent(t.whatsapp.text)
+  const { t } = useLang()
 
   return (
     <section id="precios" className="py-16 sm:py-24 bg-bg-section">
@@ -51,14 +48,9 @@ const Pricing = () => {
                       </div>
                     ))}
                   </div>
-                  <a
-                    href={`https://wa.me/${PHONE}?text=${whatsappMsg}%20-%20${lang === 'es' ? 'Plan' : 'Plan'}:%20${plan.title}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`block text-center py-3 rounded-lg font-semibold text-sm transition-all ${
-                      isPopular ? 'bg-accent text-white hover:bg-accent-dark shadow-sm' : 'border border-primary text-primary hover:bg-primary hover:text-white'
-                    }`}
-                  >
+                  <a href="#tramite" className={`block text-center py-3 rounded-lg font-semibold text-sm transition-all ${
+                    isPopular ? 'bg-accent text-white hover:bg-accent-dark shadow-sm' : 'border border-primary text-primary hover:bg-primary hover:text-white'
+                  }`}>
                     {t.pricing.select}
                   </a>
                 </div>

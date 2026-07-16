@@ -2,11 +2,8 @@ import { motion } from 'framer-motion'
 import { useLang } from '../App'
 import { ArrowRight, Clock, Users } from 'lucide-react'
 
-const PHONE = '584244296940'
-
 const StickyMobileCTA = () => {
-  const { t, lang } = useLang()
-  const whatsappMsg = encodeURIComponent(t.whatsapp.text)
+  const { t } = useLang()
 
   return (
     <>
@@ -21,7 +18,7 @@ const StickyMobileCTA = () => {
               <p className="text-[8px] text-text-muted leading-tight">{t.sticky.text}</p>
             </div>
           </div>
-          <a href={`https://wa.me/${PHONE}?text=${whatsappMsg}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 bg-green-600 text-white font-bold px-5 py-2.5 rounded-lg text-xs hover:bg-green-700 transition-all shadow-sm">
+          <a href="#tramite" className="flex items-center gap-1.5 bg-accent text-white font-bold px-5 py-2.5 rounded-lg text-xs hover:bg-accent-dark transition-all shadow-sm">
             {t.sticky.cta} <ArrowRight size={14} />
           </a>
         </div>
