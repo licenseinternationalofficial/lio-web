@@ -5,7 +5,7 @@ import { icons } from 'lucide-react'
 const IconRenderer = ({ name, size = 24 }) => {
   const LucideIcon = icons[name]
   if (!LucideIcon) return null
-  return <LucideIcon size={size} className="text-primary shrink-0" />
+  return <LucideIcon size={size} className="text-white shrink-0" />
 }
 
 const Requirements = () => {
