@@ -1,6 +1,7 @@
 import { Mail, Phone, MapPin } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useLang } from '../App'
+import iaaLogo from '../assets/images/iaa-logo.png'
 
 const Footer = () => {
   const { t } = useLang()
@@ -11,11 +12,9 @@ const Footer = () => {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 mb-10">
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">LIO</span>
-              </div>
+              <img src={iaaLogo} alt="IAA" className="h-10 w-auto brightness-0 invert" />
               <div>
-                <span className="text-base font-bold text-white leading-none block">LIO</span>
+                <span className="text-sm font-bold text-white leading-none block">International Automobile Association</span>
                 <span className="text-[8px] text-gray-400 uppercase tracking-[0.2em] font-medium leading-none block">License International Official</span>
               </div>
             </div>

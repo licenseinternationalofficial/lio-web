@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Menu, X, Globe } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLang } from '../App'
+import iaaLogo from '../assets/images/iaa-logo.png'
 
 const Navbar = () => {
   const { t, toggleLang, lang } = useLang()
@@ -26,11 +27,9 @@ const Navbar = () => {
     <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-primary shadow-lg shadow-black/20 py-2' : 'bg-primary py-3'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         <a href="#" className="flex items-center gap-3">
-          <div className="bg-accent w-9 h-9 rounded-lg flex items-center justify-center shadow-sm">
-            <span className="text-white font-bold text-base">LIO</span>
-          </div>
+          <img src={iaaLogo} alt="IAA" className="h-10 w-auto brightness-0 invert" />
           <div>
-            <span className="text-white text-base font-bold leading-none block">LIO</span>
+            <span className="text-white text-sm font-bold leading-none block">International Automobile Association</span>
             <span className="text-gray-400 text-[8px] uppercase tracking-[0.2em] font-medium leading-none block">License International Official</span>
           </div>
         </a>

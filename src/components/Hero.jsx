@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { useLang } from '../App'
 import unLogo from '../assets/images/un-logo.svg'
 import fiaLogo from '../assets/images/fia-logo.svg'
+import iaaLogo from '../assets/images/iaa-logo.png'
 
 const flags = [
   { code: 'mx', name: 'México' }, { code: 'br', name: 'Brasil' },
@@ -93,6 +94,11 @@ const Hero = () => {
                 </div>
 
                 <div className="flex justify-center gap-6 mb-5">
+                  <motion.div whileHover={{ scale: 1.05 }} className="bg-white/5 rounded-xl p-3 text-center border border-white/10 flex-1">
+                    <img src={iaaLogo} alt="IAA" className="h-10 mx-auto mb-2" />
+                    <p className="text-white text-[10px] font-semibold">IAA</p>
+                    <p className="text-gray-500 text-[8px]">International Automobile Association</p>
+                  </motion.div>
                   <motion.div whileHover={{ scale: 1.05 }} className="bg-white/5 rounded-xl p-3 text-center border border-white/10 flex-1">
                     <img src={unLogo} alt="UN" className="h-10 mx-auto mb-2" />
                     <p className="text-white text-[10px] font-semibold">United Nations</p>
