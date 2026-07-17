@@ -94,20 +94,20 @@ const Hero = () => {
                 </div>
 
                 <div className="flex justify-center gap-6 mb-5">
-                  <motion.div whileHover={{ scale: 1.05 }} className="bg-white/5 rounded-xl p-3 text-center border border-white/10 flex-1">
+                  <motion.div whileHover={{ scale: 1.05 }} className="bg-gray-600/20 backdrop-blur-sm rounded-xl p-3 text-center border border-white/15 flex-1">
                     <img src={iaaLogo} alt="IAA" className="h-10 mx-auto mb-2" />
                     <p className="text-white text-[10px] font-semibold">IAA</p>
-                    <p className="text-gray-500 text-[8px]">International Automobile Association</p>
+                    <p className="text-gray-400 text-[8px]">International Automobile Association</p>
                   </motion.div>
-                  <motion.div whileHover={{ scale: 1.05 }} className="bg-white/5 rounded-xl p-3 text-center border border-white/10 flex-1">
+                  <motion.div whileHover={{ scale: 1.05 }} className="bg-gray-600/20 backdrop-blur-sm rounded-xl p-3 text-center border border-white/15 flex-1">
                     <img src={unLogo} alt="UN" className="h-10 mx-auto mb-2" />
                     <p className="text-white text-[10px] font-semibold">United Nations</p>
-                    <p className="text-gray-500 text-[8px]">Ginebra 1949</p>
+                    <p className="text-gray-400 text-[8px]">Ginebra 1949</p>
                   </motion.div>
-                  <motion.div whileHover={{ scale: 1.05 }} className="bg-white/5 rounded-xl p-3 text-center border border-white/10 flex-1">
+                  <motion.div whileHover={{ scale: 1.05 }} className="bg-gray-600/20 backdrop-blur-sm rounded-xl p-3 text-center border border-white/15 flex-1">
                     <img src={fiaLogo} alt="FIA" className="h-10 mx-auto mb-2" />
                     <p className="text-white text-[10px] font-semibold">FIA</p>
-                    <p className="text-gray-500 text-[8px]">Fédération Internationale</p>
+                    <p className="text-gray-400 text-[8px]">Fédération Internationale</p>
                   </motion.div>
                 </div>
 
