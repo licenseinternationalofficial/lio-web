@@ -26,7 +26,21 @@ const DocumentShowcase = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start max-w-5xl mx-auto">
+        <div className="lg:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 scrollbar-hide">
+          {[
+            { img: licenciaFrente, label: lang === 'es' ? 'Carnet de Identificación Físico' : 'Physical Identification Card' },
+            { img: licenciaDorso, label: lang === 'es' ? 'Dorso del carnet con código QR' : 'Card back with QR code' },
+            { img: folletoTraduccion, label: lang === 'es' ? 'Folleto de Traducción en 9 Idiomas' : 'Translation Booklet in 9 Languages' },
+            { img: packageCompleto, label: lang === 'es' ? 'Paquete Completo' : 'Complete Package' },
+          ].map((item, i) => (
+            <div key={i} className="bg-bg-section rounded-2xl p-4 border border-primary-light shadow-sm min-w-[260px] snap-start shrink-0">
+              <img src={item.img} alt={item.label} className="w-full rounded-xl" loading="lazy" />
+              <p className="text-center text-xs text-text-muted mt-2 font-medium">{item.label}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="hidden lg:grid lg:grid-cols-2 gap-8 sm:gap-12 items-start max-w-5xl mx-auto">
           <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-4">
             <div className="bg-bg-section rounded-2xl p-4 border border-primary-light shadow-sm">
               <img src={licenciaFrente} alt="Licencia internacional frente" className="w-full rounded-xl" loading="lazy" />
@@ -47,21 +61,21 @@ const DocumentShowcase = () => {
               <img src={packageCompleto} alt="Paquete completo" className="w-full rounded-xl" loading="lazy" />
               <p className="text-center text-xs text-text-muted mt-2 font-medium">{lang === 'es' ? 'Paquete Completo' : 'Complete Package'}</p>
             </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              {[
-                { icon: Globe, title: lang === 'es' ? '9 Idiomas' : '9 Languages', desc: lang === 'es' ? 'Traducción oficial multilingüe' : 'Official multilingual translation' },
-                { icon: QrCode, title: lang === 'es' ? 'QR' : 'QR Code', desc: lang === 'es' ? 'Verificación electrónica' : 'Electronic verification' },
-                { icon: Shield, title: lang === 'es' ? 'Respaldo' : 'Backing', desc: lang === 'es' ? 'Convenio de Ginebra 1949' : 'Geneva Convention 1949' },
-              ].map((item, i) => (
-                <div key={i} className="bg-accent-subtle rounded-xl p-3 text-center border border-accent-light">
-                  <item.icon size={18} className="text-accent mx-auto mb-1" />
-                  <p className="font-bold text-primary text-[11px]">{item.title}</p>
-                  <p className="text-text-muted text-[9px]">{item.desc}</p>
-                </div>
-              ))}
-            </div>
           </motion.div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-5xl mx-auto mt-6 lg:mt-0">
+          {[
+            { icon: Globe, title: lang === 'es' ? '9 Idiomas' : '9 Languages', desc: lang === 'es' ? 'Traducción oficial multilingüe' : 'Official multilingual translation' },
+            { icon: QrCode, title: lang === 'es' ? 'QR' : 'QR Code', desc: lang === 'es' ? 'Verificación electrónica' : 'Electronic verification' },
+            { icon: Shield, title: lang === 'es' ? 'Respaldo' : 'Backing', desc: lang === 'es' ? 'Convenio de Ginebra 1949' : 'Geneva Convention 1949' },
+          ].map((item, i) => (
+            <div key={i} className="bg-accent-subtle rounded-xl p-3 text-center border border-accent-light">
+              <item.icon size={18} className="text-accent mx-auto mb-1" />
+              <p className="font-bold text-primary text-[11px]">{item.title}</p>
+              <p className="text-text-muted text-[9px]">{item.desc}</p>
+            </div>
+          ))}
         </div>
 
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mt-8">
