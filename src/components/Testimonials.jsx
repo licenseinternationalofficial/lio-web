@@ -17,7 +17,7 @@ const Testimonials = () => {
           <p className="text-text-muted max-w-xl mx-auto mt-4">{t.testimonials.subtitle}</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-5 overflow-x-auto sm:overflow-visible snap-x snap-mandatory sm:snap-none pb-4 -mx-4 sm:mx-0 px-4 sm:px-0 scrollbar-hide">
           {t.testimonials.items.map((item, index) => (
             <motion.div
               key={index}
@@ -25,7 +25,7 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.08 }}
               viewport={{ once: true }}
-              className="bg-bg-section rounded-xl p-5 border border-primary-light card-hover"
+              className="bg-bg-section rounded-xl p-5 border border-primary-light card-hover min-w-[280px] sm:min-w-0 snap-start"
             >
               <div className="flex items-center gap-1 mb-3">
                 {Array.from({ length: item.rating }).map((_, i) => (
