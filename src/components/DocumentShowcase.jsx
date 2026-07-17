@@ -33,7 +33,7 @@ const DocumentShowcase = () => {
             { img: folletoTraduccion, label: lang === 'es' ? 'Folleto de Traducción en 9 Idiomas' : 'Translation Booklet in 9 Languages' },
             { img: packageCompleto, label: lang === 'es' ? 'Paquete Completo' : 'Complete Package' },
           ].map((item, i) => (
-            <div key={i} className="bg-bg-section rounded-2xl p-4 border border-primary-light shadow-sm min-w-[260px] snap-start shrink-0">
+            <div key={i} className="bg-bg-section rounded-2xl p-4 border border-primary-light shadow-sm w-[85vw] sm:min-w-0 snap-start shrink-0">
               <img src={item.img} alt={item.label} className="w-full rounded-xl" loading="lazy" />
               <p className="text-center text-xs text-text-muted mt-2 font-medium">{item.label}</p>
             </div>

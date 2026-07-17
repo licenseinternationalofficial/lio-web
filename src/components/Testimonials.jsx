@@ -25,7 +25,7 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.08 }}
               viewport={{ once: true }}
-              className="bg-bg-section rounded-xl p-5 border border-primary-light card-hover min-w-[280px] sm:min-w-0 snap-start"
+              className="bg-bg-section rounded-xl p-5 border border-primary-light card-hover min-w-[85vw] sm:min-w-0 snap-start"
             >
               <div className="flex items-center gap-1 mb-3">
                 {Array.from({ length: item.rating }).map((_, i) => (
