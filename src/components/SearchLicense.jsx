@@ -85,28 +85,37 @@ const SearchLicense = () => {
       const pw = doc.internal.pageSize.getWidth()
       const ph = doc.internal.pageSize.getHeight()
 
-      const loadImg = (src) => new Promise(resolve => {
-        const i = new Image(); i.crossOrigin = 'Anonymous'; i.onload = () => {
-          const c = document.createElement('canvas')
-          c.width = i.naturalWidth || 200; c.height = i.naturalHeight || 80
-          c.getContext('2d').drawImage(i, 0, 0)
-          const dataUrl = c.toDataURL('image/png')
-          const img = new Image(); img.onload = () => resolve(img); img.src = dataUrl
-        }; i.onerror = () => resolve(null); i.src = src
-      })
+      const loadImgDataUrl = async (src) => {
+        if (!src) return null
+        try {
+          const resp = await fetch(src)
+          if (!resp.ok) return null
+          if (src.endsWith('.svg') || resp.headers.get('content-type')?.includes('svg')) {
+            const text = await resp.text()
+            const img = new Image()
+            await new Promise((res, rej) => { img.onload = res; img.onerror = rej; img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(text) })
+            const c = document.createElement('canvas')
+            c.width = img.naturalWidth || 200; c.height = img.naturalHeight || 60
+            c.getContext('2d').drawImage(img, 0, 0)
+            return c.toDataURL('image/png')
+          } else {
+            const blob = await resp.blob()
+            return new Promise(resolve => { const r = new FileReader(); r.onload = () => resolve(r.result); r.readAsDataURL(blob) })
+          }
+        } catch { return null }
+      }
 
-      const [iaaImg, unImg, fiaImg] = await Promise.all([
-        loadImg(iaaLogo), loadImg(unLogo), loadImg(fiaLogo),
+      const [iaaUrl, unUrl, fiaUrl] = await Promise.all([
+        loadImgDataUrl(iaaLogo), loadImgDataUrl(unLogo), loadImgDataUrl(fiaLogo),
       ])
 
-      try {
-        if (iaaImg) {
-          const wmW = 120; const wmH = (iaaImg.naturalHeight || iaaImg.height || 100) / (iaaImg.naturalWidth || iaaImg.width || 100) * wmW
+      if (iaaUrl) {
+        try {
           doc.setGState(new GState({ opacity: 0.15 }))
-          doc.addImage(iaaImg, (pw - wmW) / 2, (ph - wmH) / 2, wmW, wmH)
+          doc.addImage(iaaUrl, 'PNG', (pw - 120) / 2, (ph - 70) / 2, 120, 70)
           doc.setGState(new GState({ opacity: 1 }))
-        }
-      } catch {}
+        } catch {}
+      }
 
       const es = lang === 'es'
       const endorseText = es ? 'Avalado por IAA · ONU · FIA' : 'Endorsed by IAA · UN · FIA'
@@ -271,18 +280,12 @@ const SearchLicense = () => {
       doc.setDrawColor(200); doc.setLineWidth(0.3)
       doc.line(20, y, pw - 20, y); y += 5
 
-      const logos = [
-        { img: iaaImg, label: 'IAA' },
-        { img: unImg, label: 'UN' },
-        { img: fiaImg, label: 'FIA' },
-      ]
-      const logoW = 16; const logoGap = 6; const totalW = logos.length * logoW + (logos.length - 1) * logoGap
+      const logos = [iaaUrl, unUrl, fiaUrl].filter(Boolean)
+      const logoW = 16; const logoGap = 6
+      const totalW = logos.length * logoW + (logos.length - 1) * logoGap
       let lx = (pw - totalW) / 2
-      logos.forEach(({ img }) => {
-        if (img) {
-          const lh = (img.naturalHeight || img.height || 20) / (img.naturalWidth || img.width || 60) * logoW
-          try { doc.addImage(img, lx, y, logoW, lh) } catch {}
-        }
+      logos.forEach(url => {
+        try { doc.addImage(url, 'PNG', lx, y, logoW, logoW * 0.6) } catch {}
         lx += logoW + logoGap
       })
       y += 10
