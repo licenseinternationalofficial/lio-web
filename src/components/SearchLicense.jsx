@@ -292,7 +292,8 @@ const SearchLicense = () => {
       doc.setFont('helvetica', 'normal'); doc.setFontSize(6.5)
       doc.text(`IAA — ${endorseText}`, pw / 2, y + 4, { align: 'center' })
 
-      doc.save(`LIO-License-${result.id || result.id_tramite}.pdf`)
+      const pdfUrl = doc.output('bloburl')
+      window.open(pdfUrl, '_blank')
     } catch (e) {
       console.error('PDF generation error:', e)
     }
