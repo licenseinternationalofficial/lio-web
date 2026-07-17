@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useLang } from '../App'
 import { jsPDF, GState } from 'jspdf'
 import iaaLogo from '../assets/images/iaa-logo.png'
-import unLogo from '../assets/images/un-logo.svg'
-import fiaLogo from '../assets/images/fia-logo.svg'
+import unLogo from '../assets/images/un-logo.png'
+import fiaLogo from '../assets/images/fia-logo.png'
 
 function parseCSVLine(line) {
   const result = []
