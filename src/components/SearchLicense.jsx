@@ -175,16 +175,15 @@ const SearchLicense = () => {
 
       y = Math.max(y, fotoY + 42 + 4) + 1
 
-      if (result.link || result.firmaUrl || result.cedulaUrl) {
+      if (result.link || result.cedulaUrl) {
         doc.setDrawColor(200); doc.setLineWidth(0.3)
         doc.line(20, y, pw - 20, y); y += 5
         doc.setFont('helvetica', 'bold'); doc.setFontSize(8)
         doc.text(es ? 'DOCUMENTOS ADJUNTOS' : 'ATTACHED DOCUMENTS', pw / 2, y, { align: 'center' }); y += 4
 
-        const thumbW = 38; const thumbH = 26; const thumbGap = 5
+        const thumbW = 48; const thumbH = 32; const thumbGap = 8
         const docs = [
           { url: result.link, label: es ? 'Licencia' : 'License' },
-          { url: result.firmaUrl, label: 'Firma' },
           { url: result.cedulaUrl, label: es ? 'Cédula' : 'ID' },
         ].filter(d => d.url)
         const totalDocsW = docs.length * thumbW + (docs.length - 1) * thumbGap
@@ -201,7 +200,7 @@ const SearchLicense = () => {
             doc.addImage(b64, ext, dx, y, thumbW, thumbH)
             doc.setDrawColor(200); doc.setLineWidth(0.3)
             doc.rect(dx, y, thumbW, thumbH)
-            doc.setFont('helvetica', 'italic'); doc.setFontSize(5.5)
+            doc.setFont('helvetica', 'italic'); doc.setFontSize(6)
             doc.text(docItem.label, dx + thumbW / 2, y + thumbH + 3, { align: 'center' })
           } catch {}
           dx += thumbW + thumbGap
@@ -211,7 +210,7 @@ const SearchLicense = () => {
 
       if (result.firmaUrl) {
         y += 1
-        const sigW = 45; const sigH = 16
+        const sigW = 50; const sigH = 18
         try {
           const resp = await fetch(result.firmaUrl, { mode: 'cors' })
           const blob = await resp.blob()
@@ -225,7 +224,7 @@ const SearchLicense = () => {
           doc.text(es ? 'Firma del titular / Holder\'s signature' : 'Holder\'s signature / Firma del titular', pw / 2, y + sigH + 3, { align: 'center' })
           y += sigH + 7
           if (result.nombre || result.id) {
-            doc.setFont('helvetica', 'normal'); doc.setFontSize(6)
+            doc.setFont('helvetica', 'normal'); doc.setFontSize(6.5)
             const nameLine = result.nombre || ''
             const idLine = result.id ? `N° ${result.id}` : ''
             doc.text(nameLine, pw / 2, y, { align: 'center' })
@@ -281,12 +280,12 @@ const SearchLicense = () => {
       doc.line(20, y, pw - 20, y); y += 5
 
       const logos = [iaaUrl, unUrl, fiaUrl].filter(Boolean)
-      const logoW = 16; const logoGap = 6
-      const totalW = logos.length * logoW + (logos.length - 1) * logoGap
+      const logoSize = 14
+      const totalW = logos.length * logoSize + (logos.length - 1) * 6
       let lx = (pw - totalW) / 2
       logos.forEach(url => {
-        try { doc.addImage(url, 'PNG', lx, y, logoW, logoW * 0.6) } catch {}
-        lx += logoW + logoGap
+        try { doc.addImage(url, 'PNG', lx, y, logoSize, logoSize) } catch {}
+        lx += logoSize + 6
       })
       y += 10
 
