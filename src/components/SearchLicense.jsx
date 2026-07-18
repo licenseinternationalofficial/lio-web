@@ -299,6 +299,14 @@ const SearchLicense = () => {
         pw / 2, y, { align: 'center' })
       doc.setFont('helvetica', 'normal'); doc.setFontSize(5.5)
       doc.text(`IAA — ${endorseText}`, pw / 2, y + 3.5, { align: 'center' })
+      y += 5
+      doc.setTextColor(215, 215, 215)
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(3.2)
+      const discText = es
+        ? 'La tarjeta IAA es un producto de traducción y diseño gráfico de la licencia de conducir nacional del titular. No es un documento gubernamental, una licencia oficial de conducir, ni un Permiso Internacional de Conducir (IDP) emitido por autoridad gubernamental alguna. No reemplaza la licencia nacional original. Debe portarse siempre junto con la licencia oficial del país de origen. IAA no está afiliada a ningún gobierno, DMV, DGT ni entidad de tránsito. Las traducciones son de carácter informativo. Al adquirir este producto, el usuario acepta los Términos y Condiciones publicados en el sitio web.'
+        : 'The IAA card is a translation and graphic design product of the holder\'s national driver\'s license. It is not a government document, official driver\'s license, or IDP issued by any governmental authority. Does not replace the original national license. Must always be carried together with the official license from the country of origin. IAA is not affiliated with any government, DMV, DGT or traffic authority. Translations are for informational purposes. By purchasing this product, the user accepts the Terms & Conditions published on the website.'
+      doc.text(discText, pw / 2, y, { align: 'center', maxWidth: 170 })
+      doc.setTextColor(0, 0, 0)
 
       const pdfUrl = doc.output('bloburl')
       window.open(pdfUrl, '_blank')
