@@ -411,9 +411,9 @@ const SearchLicense = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4 pt-4 border-t border-primary-light">
+                  <div className="flex flex-col sm:flex-row gap-3 mt-4 pt-4 border-t border-primary-light justify-center">
                     {result.link && (
-                      <div>
+                      <div className="flex-1 max-w-xs mx-auto sm:mx-0">
                         <span className="text-[9px] text-text-muted uppercase font-bold tracking-widest">{t.search.licenciaLabel}</span>
                         <div className="mt-1 w-full h-28 rounded-lg border border-primary-light overflow-hidden bg-gray-50">
                           <img src={result.link} alt="License" className="w-full h-full object-contain" onError={(e) => { e.target.style.display='none'; e.target.parentElement.innerHTML=`<a href=\"${result.linkOriginal || result.link}\" target=\"_blank\" class=\"w-full h-full flex items-center justify-center text-accent text-[10px] font-semibold hover:underline\">${lang === 'es' ? 'Ver Documento' : 'View Document'}</a>` }} />
@@ -421,7 +421,7 @@ const SearchLicense = () => {
                       </div>
                     )}
                     {result.cedulaUrl && (
-                      <div>
+                      <div className="flex-1 max-w-xs mx-auto sm:mx-0">
                         <span className="text-[9px] text-text-muted uppercase font-bold tracking-widest">{t.search.cedulaLabel}</span>
                         <div className="mt-1 w-full h-28 rounded-lg border border-primary-light overflow-hidden bg-gray-50">
                           <img src={result.cedulaUrl} alt="ID" className="w-full h-full object-contain" onError={(e) => { e.target.style.display='none'; e.target.parentElement.innerHTML=`<a href=\"${result.cedulaOriginal || result.cedulaUrl}\" target=\"_blank\" class=\"w-full h-full flex items-center justify-center text-accent text-[10px] font-semibold hover:underline\">${lang === 'es' ? 'Ver Cédula' : 'View ID'}</a>` }} />
