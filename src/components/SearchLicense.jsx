@@ -300,7 +300,7 @@ const SearchLicense = () => {
       doc.setFont('helvetica', 'normal'); doc.setFontSize(5.5)
       doc.text(`IAA — ${endorseText}`, pw / 2, y + 3.5, { align: 'center' })
       y += 5
-      doc.setTextColor(215, 215, 215)
+      doc.setTextColor(100, 100, 100)
       doc.setFont('helvetica', 'normal'); doc.setFontSize(3.2)
       const discText = es
         ? 'La tarjeta IAA es un producto de traducción y diseño gráfico de la licencia de conducir nacional del titular. No es un documento gubernamental, una licencia oficial de conducir, ni un Permiso Internacional de Conducir (IDP) emitido por autoridad gubernamental alguna. No reemplaza la licencia nacional original. Debe portarse siempre junto con la licencia oficial del país de origen. IAA no está afiliada a ningún gobierno, DMV, DGT ni entidad de tránsito. Las traducciones son de carácter informativo. Al adquirir este producto, el usuario acepta los Términos y Condiciones publicados en el sitio web.'
