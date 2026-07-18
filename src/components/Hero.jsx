@@ -69,7 +69,7 @@ const Hero = () => {
                 {[
                   { icon: ShieldCheck, label: `160+ ${t.hero.stats.paises}` },
                   { icon: ShieldCheck, label: `24-48h ${t.hero.stats.respuesta}` },
-                  { icon: ShieldCheck, label: `100% ${t.hero.stats.legal}` },
+                  { icon: ShieldCheck, label: t.hero.stats.legal },
                 ].map((s, i) => (
                   <div key={i} className="flex items-center gap-2 bg-white/5 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/10">
                     <s.icon size={14} className="text-accent" />

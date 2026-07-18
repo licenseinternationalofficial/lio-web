@@ -170,11 +170,10 @@ const ApplicationForm = () => {
                         <label className="flex items-start gap-3 cursor-pointer">
                           <input type="checkbox" checked={acceptedTerms} onChange={e => setAcceptedTerms(e.target.checked)} className="mt-0.5 w-4 h-4 rounded border-primary-light text-accent focus:ring-accent cursor-pointer shrink-0" />
                           <span className="text-xs text-text-muted leading-relaxed">
-                            {es ? 'He leído y acepto los ' : 'I have read and agree to the '}
+                            {es ? 'Acepto los ' : 'I accept the '}
                             <button type="button" onClick={() => setShowTerms(true)} className="text-accent underline hover:text-accent-dark font-semibold">
                               {es ? 'Términos y Condiciones' : 'Terms & Conditions'}
                             </button>
-                            {es ? ' y el procesamiento de mis datos para la emisión de la tarjeta de traducción.' : ' and the processing of my data for the translation card issuance.'}
                           </span>
                         </label>
                       </div>
