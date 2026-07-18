@@ -13,7 +13,6 @@ import ApplicationForm from './components/ApplicationForm'
 import SearchLicense from './components/SearchLicense'
 import FAQ from './components/FAQ'
 import AdminPanel from './components/AdminPanel'
-import WhatsAppButton from './components/WhatsAppButton'
 import Footer from './components/Footer'
 import { translations } from './data/translations'
 
