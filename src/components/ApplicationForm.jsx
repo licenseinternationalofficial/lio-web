@@ -2,11 +2,15 @@ import { useState } from 'react'
 import { User, FileText, Camera, Send, ChevronRight, ChevronLeft } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLang } from '../App'
+import TermsModal from './TermsModal'
 
 const ApplicationForm = () => {
-  const { t } = useLang()
+  const { t, lang } = useLang()
+  const es = lang === 'es'
   const [step, setStep] = useState(1)
   const totalSteps = 4
+  const [acceptedTerms, setAcceptedTerms] = useState(false)
+  const [showTerms, setShowTerms] = useState(false)
 
   const [formData, setFormData] = useState({
     nombreCompleto: '', paisNacimiento: '', paisResidencia: '', estatura: '',
@@ -34,7 +38,7 @@ const ApplicationForm = () => {
     if (step === 1) return formData.nombreCompleto?.trim() && formData.paisNacimiento?.trim() && formData.fechaNacimiento && formData.paisResidencia?.trim()
     if (step === 2) return formData.estatura?.trim() && formData.tipoSangre && formData.colorOjos?.trim()
     if (step === 3) return capturedFiles.fotoCarnet && capturedFiles.fotoFirma && capturedFiles.fotoID && capturedFiles.fotoLicencia
-    if (step === 4) return formData.email?.trim() && formData.telefono?.trim()
+    if (step === 4) return formData.email?.trim() && formData.telefono?.trim() && acceptedTerms
     return true
   }
 
@@ -163,7 +167,16 @@ const ApplicationForm = () => {
                       <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder={t.form.step4.emailPlaceholder} className="w-full px-4 py-3 rounded-lg border border-primary-light focus:border-accent focus:ring-2 focus:ring-accent/10 outline-none transition-all text-sm" required />
                       <input type="tel" name="telefono" value={formData.telefono} onChange={handleChange} placeholder={t.form.step4.telefonoPlaceholder} className="w-full px-4 py-3 rounded-lg border border-primary-light focus:border-accent focus:ring-2 focus:ring-accent/10 outline-none transition-all text-sm" required />
                       <div className="bg-bg-section p-4 rounded-lg">
-                        <p className="text-xs text-text-muted leading-relaxed">{t.form.step4.terms}</p>
+                        <label className="flex items-start gap-3 cursor-pointer">
+                          <input type="checkbox" checked={acceptedTerms} onChange={e => setAcceptedTerms(e.target.checked)} className="mt-0.5 w-4 h-4 rounded border-primary-light text-accent focus:ring-accent cursor-pointer shrink-0" />
+                          <span className="text-xs text-text-muted leading-relaxed">
+                            {es ? 'He leído y acepto los ' : 'I have read and agree to the '}
+                            <button type="button" onClick={() => setShowTerms(true)} className="text-accent underline hover:text-accent-dark font-semibold">
+                              {es ? 'Términos y Condiciones' : 'Terms & Conditions'}
+                            </button>
+                            {es ? ' y el procesamiento de mis datos para la emisión de la tarjeta de traducción.' : ' and the processing of my data for the translation card issuance.'}
+                          </span>
+                        </label>
                       </div>
                     </div>
                   </motion.div>
@@ -190,6 +203,7 @@ const ApplicationForm = () => {
           </div>
         </motion.div>
       </div>
+      <TermsModal isOpen={showTerms} onClose={() => setShowTerms(false)} />
     </section>
   )
 }
