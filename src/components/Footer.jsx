@@ -20,7 +20,7 @@ const Footer = () => {
             </div>
             <p className="text-sm text-gray-400 leading-relaxed mb-5">{t.footer.desc}</p>
             <div className="flex gap-3">
-              <a href="mailto:license.internationa.official@gmail.com" className="text-gray-400 hover:text-accent transition-colors"><Mail size={18} /></a>
+              <a href="mailto:license.international.official@gmail.com" className="text-gray-400 hover:text-accent transition-colors"><Mail size={18} /></a>
               <a href="tel:+584244296940" className="text-gray-400 hover:text-accent transition-colors"><Phone size={18} /></a>
             </div>
           </div>
@@ -47,8 +47,8 @@ const Footer = () => {
           <div>
             <h4 className="font-bold text-accent text-xs uppercase tracking-wider mb-4">{t.footer.contact}</h4>
             <div className="flex flex-col gap-3">
-              <a href="mailto:license.internationa.official@gmail.com" className="flex items-center gap-2.5 text-sm text-gray-400 hover:text-white transition-colors break-all">
-                <Mail size={14} className="text-accent shrink-0" /> license.internationa.official@gmail.com
+              <a href="mailto:license.international.official@gmail.com" className="flex items-center gap-2.5 text-sm text-gray-400 hover:text-white transition-colors break-all">
+                <Mail size={14} className="text-accent shrink-0" /> license.international.official@gmail.com
               </a>
               <a href="tel:+584244296940" className="flex items-center gap-2.5 text-sm text-gray-400 hover:text-white transition-colors">
                 <Phone size={14} className="text-accent shrink-0" /> +58 4244296940

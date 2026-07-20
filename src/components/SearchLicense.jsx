@@ -186,15 +186,15 @@ const SearchLicense = () => {
 
         const thumbW = 48; const thumbH = 32; const thumbGap = 8
         const docs = [
-          { url: result.link, label: es ? 'Licencia' : 'License' },
-          { url: result.cedulaUrl, label: es ? 'Cédula' : 'ID' },
-        ].filter(d => d.url)
+          result.link,
+          result.cedulaUrl,
+        ].filter(Boolean)
         const totalDocsW = docs.length * thumbW + (docs.length - 1) * thumbGap
         let dx = (pw - totalDocsW) / 2
 
-        for (const docItem of docs) {
+        for (const url of docs) {
           try {
-            const resp = await fetch(docItem.url, { mode: 'cors' })
+            const resp = await fetch(url, { mode: 'cors' })
             const blob = await resp.blob()
             const b64 = await new Promise(resolve => {
               const r = new FileReader(); r.onload = () => resolve(r.result); r.readAsDataURL(blob)
@@ -203,8 +203,6 @@ const SearchLicense = () => {
             doc.addImage(b64, ext, dx, y, thumbW, thumbH)
             doc.setDrawColor(200); doc.setLineWidth(0.3)
             doc.rect(dx, y, thumbW, thumbH)
-            doc.setFont('helvetica', 'italic'); doc.setFontSize(6)
-            doc.text(docItem.label, dx + thumbW / 2, y + thumbH + 3, { align: 'center' })
           } catch {}
           dx += thumbW + thumbGap
         }
@@ -414,17 +412,15 @@ const SearchLicense = () => {
                   <div className="flex flex-col sm:flex-row gap-3 mt-4 pt-4 border-t border-primary-light justify-center">
                     {result.link && (
                       <div className="flex-1 max-w-xs mx-auto sm:mx-0">
-                        <span className="text-[9px] text-text-muted uppercase font-bold tracking-widest">{t.search.licenciaLabel}</span>
                         <div className="mt-1 w-full h-28 rounded-lg border border-primary-light overflow-hidden bg-gray-50">
-                          <img src={result.link} alt="License" className="w-full h-full object-contain" onError={(e) => { e.target.style.display='none'; e.target.parentElement.innerHTML=`<a href=\"${result.linkOriginal || result.link}\" target=\"_blank\" class=\"w-full h-full flex items-center justify-center text-accent text-[10px] font-semibold hover:underline\">${lang === 'es' ? 'Ver Documento' : 'View Document'}</a>` }} />
+                          <img src={result.link} alt="" className="w-full h-full object-contain" onError={(e) => { e.target.style.display='none'; e.target.parentElement.innerHTML=`<a href=\"${result.linkOriginal || result.link}\" target=\"_blank\" class=\"w-full h-full flex items-center justify-center text-accent text-[10px] font-semibold hover:underline\">${lang === 'es' ? 'Ver' : 'View'}</a>` }} />
                         </div>
                       </div>
                     )}
                     {result.cedulaUrl && (
                       <div className="flex-1 max-w-xs mx-auto sm:mx-0">
-                        <span className="text-[9px] text-text-muted uppercase font-bold tracking-widest">{t.search.cedulaLabel}</span>
                         <div className="mt-1 w-full h-28 rounded-lg border border-primary-light overflow-hidden bg-gray-50">
-                          <img src={result.cedulaUrl} alt="ID" className="w-full h-full object-contain" onError={(e) => { e.target.style.display='none'; e.target.parentElement.innerHTML=`<a href=\"${result.cedulaOriginal || result.cedulaUrl}\" target=\"_blank\" class=\"w-full h-full flex items-center justify-center text-accent text-[10px] font-semibold hover:underline\">${lang === 'es' ? 'Ver Cédula' : 'View ID'}</a>` }} />
+                          <img src={result.cedulaUrl} alt="" className="w-full h-full object-contain" onError={(e) => { e.target.style.display='none'; e.target.parentElement.innerHTML=`<a href=\"${result.cedulaOriginal || result.cedulaUrl}\" target=\"_blank\" class=\"w-full h-full flex items-center justify-center text-accent text-[10px] font-semibold hover:underline\">${lang === 'es' ? 'Ver' : 'View'}</a>` }} />
                         </div>
                       </div>
                     )}
