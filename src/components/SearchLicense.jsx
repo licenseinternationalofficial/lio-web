@@ -7,17 +7,25 @@ import iaaLogo from '../assets/images/iaa-logo.png'
 import unLogo from '../assets/images/un-logo.png'
 import fiaLogo from '../assets/images/fia-logo.png'
 
-function parseCSVLine(line) {
-  const result = []
-  let current = ''; let inQuotes = false
-  for (let i = 0; i < line.length; i++) {
-    const c = line[i]
-    if (c === '"') inQuotes = !inQuotes
-    else if (c === ',' && !inQuotes) { result.push(current.trim()); current = '' }
-    else current += c
-  }
-  result.push(current.trim())
-  return result
+const FORM_API = import.meta.env.VITE_FORM_API || ''
+
+function jsonp(url) {
+  return new Promise((resolve, reject) => {
+    const cb = 'lic_cb_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7)
+    const separator = url.includes('?') ? '&' : '?'
+    const fullUrl = url + separator + 'callback=' + cb
+    window[cb] = (data) => {
+      delete window[cb]
+      const script = document.querySelector(`script[data-jsonp="${cb}"]`)
+      if (script) script.remove()
+      resolve(data)
+    }
+    const s = document.createElement('script')
+    s.dataset.jsonp = cb
+    s.src = fullUrl
+    s.onerror = () => { delete window[cb]; s.remove(); reject(new Error('JSONP load failed')) }
+    document.body.appendChild(s)
+  })
 }
 
 function getDirectImageUrl(url) {
@@ -47,31 +55,37 @@ const SearchLicense = () => {
     if (!docId) return
     setStatus('loading')
     try {
-      const CSV_URL = import.meta.env.VITE_CSV_URL || 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQcLOEKNE8N8-dRiH9ZhFxxbpK59mSE8gc-Of1wya6QH6HuOQvs1l6pFnxM35HoUhUsOCI12p03n5YY/pub?output=csv'
-      const res = await fetch(CSV_URL)
-      const text = await res.text()
-      const lines = text.split('\n').filter(l => l.trim())
-      const rows = lines.slice(1).map(line => parseCSVLine(line))
-      const row = rows.find(r =>
-        (r[0] && r[0].trim() === docId.trim()) ||
-        (r[1] && r[1].trim() === docId.trim())
+      const apiUrl = FORM_API || ''
+      if (!apiUrl) { setStatus('not_found'); return }
+      const result = await jsonp(apiUrl + '?action=licencias')
+      if (!result.ok || !result.data) { setStatus('not_found'); return }
+      const q = docId.trim()
+      const found = result.data.find(r =>
+        r.documento === q ||
+        r.id_tramite === q
       )
-      if (row) {
+      if (found) {
         setResult({
-          id: row[0], id_tramite: row[1], nombre: row[2],
-          validoHasta: row[3], estado: row[4], tipo: row[5],
-          link: getDirectImageUrl(row[6] || ''),
-          linkOriginal: getGDriveFileUrl(row[6] || ''),
-          fechaNacimiento: row[7] || '',
-          nacionalidad: row[8] || '', estatura: row[9] || '',
-          tipoSangre: row[10] || '', colorOjos: row[11] || '',
-          fotoUrl: getDirectImageUrl(row[12] || ''),
-          fotoOriginal: getGDriveFileUrl(row[12] || ''),
-          paisValido: row[13] || '',
-          firmaUrl: getDirectImageUrl(row[14] || ''),
-          firmaOriginal: getGDriveFileUrl(row[14] || ''),
-          cedulaUrl: getDirectImageUrl(row[15] || ''),
-          cedulaOriginal: getGDriveFileUrl(row[15] || ''),
+          id: found.documento || '',
+          id_tramite: found.id_tramite || '',
+          nombre: found.nombre || '',
+          validoHasta: found.vencimiento || '',
+          estado: found.estado || '',
+          tipo: found.categoria || '',
+          link: getDirectImageUrl(found.licencia || ''),
+          linkOriginal: getGDriveFileUrl(found.licencia || ''),
+          fechaNacimiento: found.fecha_nacimiento || '',
+          nacionalidad: found.nacionalidad || '',
+          estatura: found.estatura || '',
+          tipoSangre: found.tipo_sangre || '',
+          colorOjos: found.color_ojos || '',
+          fotoUrl: getDirectImageUrl(found.foto_url || ''),
+          fotoOriginal: getGDriveFileUrl(found.foto_url || ''),
+          paisValido: found.pais_valido || '',
+          firmaUrl: getDirectImageUrl(found.firma || ''),
+          firmaOriginal: getGDriveFileUrl(found.firma || ''),
+          cedulaUrl: getDirectImageUrl(found.cedula || ''),
+          cedulaOriginal: getGDriveFileUrl(found.cedula || ''),
         })
         setStatus('found')
       } else setStatus('not_found')

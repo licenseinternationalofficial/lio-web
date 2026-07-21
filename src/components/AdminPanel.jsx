@@ -1,6 +1,27 @@
 import { useState, useEffect } from 'react'
-import { Lock, LayoutDashboard, Users, FileText, LogOut, ArrowLeft, Search, RefreshCw, ShieldCheck, Download, Eye, X, Plus, Check } from 'lucide-react'
+import { Lock, LayoutDashboard, Users, FileText, LogOut, ArrowLeft, Search, RefreshCw, ShieldCheck, Download, Eye, X, Plus, Check, Loader2 } from 'lucide-react'
 import { useLang } from '../App'
+
+const FORM_API = import.meta.env.VITE_FORM_API || ''
+
+function jsonp(url) {
+  return new Promise((resolve, reject) => {
+    const cb = 'adm_cb_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7)
+    const separator = url.includes('?') ? '&' : '?'
+    const fullUrl = url + separator + 'callback=' + cb
+    window[cb] = (data) => {
+      delete window[cb]
+      const script = document.querySelector(`script[data-jsonp="${cb}"]`)
+      if (script) script.remove()
+      resolve(data)
+    }
+    const s = document.createElement('script')
+    s.dataset.jsonp = cb
+    s.src = fullUrl
+    s.onerror = () => { delete window[cb]; s.remove(); reject(new Error('JSONP load failed')) }
+    document.body.appendChild(s)
+  })
+}
 
 function getDirectImageUrl(url) {
   if (!url) return ''
@@ -8,22 +29,6 @@ function getDirectImageUrl(url) {
   if (m) return `https://lh3.googleusercontent.com/d/${m[1]}=w400`
   return /^https?:\/\//i.test(url) ? url : ''
 }
-
-function parseCSVLine(line) {
-  const result = []
-  let current = ''
-  let inQuotes = false
-  for (let i = 0; i < line.length; i++) {
-    const c = line[i]
-    if (c === '"') inQuotes = !inQuotes
-    else if (c === ',' && !inQuotes) { result.push(current.trim()); current = '' }
-    else current += c
-  }
-  result.push(current.trim())
-  return result
-}
-
-const CSV_URL = import.meta.env.VITE_CSV_URL || 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQcLOEKNE8N8-dRiH9ZhFxxbpK59mSE8gc-Of1wya6QH6HuOQvs1l6pFnxM35HoUhUsOCI12p03n5YY/pub?output=csv'
 
 const AdminPanel = () => {
   const { t, lang } = useLang()
@@ -45,22 +50,28 @@ const AdminPanel = () => {
   const fetchLicenses = async () => {
     setLoading(true)
     try {
-      const res = await fetch(CSV_URL)
-      const text = await res.text()
-      const lines = text.split('\n').filter(l => l.trim())
-      const data = lines.slice(1).map(line => {
-        const r = parseCSVLine(line)
-        return {
-          id: r[0], id_tramite: r[1], nombre: r[2],
-          validoHasta: r[3], estado: r[4], tipo: r[5],
-          link: r[6] || '', fechaNacimiento: r[7] || '',
-          nacionalidad: r[8] || '', estatura: r[9] || '',
-          tipoSangre: r[10] || '', colorOjos: r[11] || '',
-          fotoUrl: r[12] || '', paisValido: r[13] || '',
-          firmaUrl: r[14] || '', cedulaUrl: r[15] || '',
-        }
-      })
-      setLicenses(data)
+      if (!FORM_API) { setLicenses([]); setLoading(false); return }
+      const result = await jsonp(FORM_API + '?action=licencias')
+      if (result.ok && result.data) {
+        setLicenses(result.data.map(r => ({
+          id: r.documento || '',
+          id_tramite: r.id_tramite || '',
+          nombre: r.nombre || '',
+          validoHasta: r.vencimiento || '',
+          estado: r.estado || '',
+          tipo: r.categoria || '',
+          link: r.licencia || '',
+          fechaNacimiento: r.fecha_nacimiento || '',
+          nacionalidad: r.nacionalidad || '',
+          estatura: r.estatura || '',
+          tipoSangre: r.tipo_sangre || '',
+          colorOjos: r.color_ojos || '',
+          fotoUrl: r.foto_url || '',
+          paisValido: r.pais_valido || '',
+          firmaUrl: r.firma || '',
+          cedulaUrl: r.cedula || '',
+        })))
+      }
     } catch (e) { console.error(e) }
     setLoading(false)
   }
@@ -99,13 +110,33 @@ const AdminPanel = () => {
     setAddForm(prev => ({ ...prev, [name]: value }))
   }
 
-  const handleAddSubmit = (e) => {
+  const handleAddSubmit = async (e) => {
     e.preventDefault()
     if (!addForm.docId || !addForm.nombre) { alert(lang === 'es' ? 'Completa Documento y Nombre' : 'Complete Document and Name'); return }
-    const csvLine = `${addForm.docId},${addForm.tramite},"${addForm.nombre}",${addForm.vencimiento},ACTIVA,${addForm.categoria},${addForm.link},${addForm.nacimiento},${addForm.nacionalidad},${addForm.estatura},${addForm.sangre},${addForm.ojos},${addForm.foto},${addForm.pais},${addForm.firma},${addForm.cedula}`
-    navigator.clipboard.writeText(csvLine)
-    setAddSuccess(true)
-    setTimeout(() => setAddSuccess(false), 3000)
+    if (!FORM_API) { alert(lang === 'es' ? 'API no configurada' : 'API not configured'); return }
+    try {
+      const payload = {
+        action: 'add-license',
+        documento: addForm.docId,
+        nombre: addForm.nombre,
+        id_tramite: addForm.tramite,
+        vencimiento: addForm.vencimiento,
+        categoria: addForm.categoria,
+        licencia_url: addForm.link,
+        fecha_nacimiento: addForm.nacimiento,
+        nacionalidad: addForm.nacionalidad,
+        estatura: addForm.estatura,
+        tipo_sangre: addForm.sangre,
+        color_ojos: addForm.ojos,
+        foto_url: addForm.foto,
+        pais_valido: addForm.pais,
+        firma_url: addForm.firma,
+        cedula_url: addForm.cedula,
+      }
+      await fetch(FORM_API, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) })
+      setAddSuccess(true)
+      setTimeout(() => { setAddSuccess(false); setShowAddForm(false); fetchLicenses() }, 2000)
+    } catch (err) { alert(lang === 'es' ? 'Error al guardar' : 'Save error') }
   }
 
   if (!isLoggedIn) {

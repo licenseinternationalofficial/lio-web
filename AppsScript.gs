@@ -1,8 +1,74 @@
+function doGet(e) {
+  try {
+    const action = e?.parameter?.action || ''
+    const callback = e?.parameter?.callback || ''
+
+    if (action === 'licencias') {
+      return serveJSONP(callback, getLicencias())
+    }
+
+    return serveJSONP(callback, { ok: true })
+  } catch (err) {
+    return serveJSONP(callback, { ok: false, error: err.toString() })
+  }
+}
+
+function serveJSONP(callback, data) {
+  const json = JSON.stringify(data)
+  const output = callback ? callback + '(' + json + ')' : json
+  const mime = callback ? ContentService.MimeType.JAVASCRIPT : ContentService.MimeType.JSON
+  return ContentService.createTextOutput(output).setMimeType(mime)
+}
+
+function getLicencias() {
+  const sheet = SpreadsheetApp.openById('19tfesoT1l-k9ee2d9R2u-qmUUGNlkrQ-soPcltI21QI')
+  const ws = sheet.getSheetByName('Licencias')
+  if (!ws) return { ok: true, data: [] }
+  const rows = ws.getDataRange().getValues()
+  if (rows.length < 2) return { ok: true, data: [] }
+
+  const cols = rows[0]
+  const data = rows.slice(1).map(row => {
+    const obj = {}
+    cols.forEach((h, i) => {
+      const key = String(h).trim()
+        .toLowerCase().replace(/[\s]+/g, '_')
+        .replace(/[^a-z0-9_]/g, '')
+      obj[key] = i < row.length ? row[i] : ''
+    })
+    return obj
+  })
+  return { ok: true, data }
+}
+
 function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents)
-    const folder = DriveApp.getFolderById('1sAgajm3yoK2g0Y5w9a1ZqbnJGcWqWcac')
     const sheet = SpreadsheetApp.openById('19tfesoT1l-k9ee2d9R2u-qmUUGNlkrQ-soPcltI21QI')
+
+    if (data.action === 'add-license') {
+      const ws = sheet.getSheetByName('Licencias') || sheet.insertSheet('Licencias')
+
+      if (ws.getLastRow() === 0) {
+        ws.appendRow(['Documento', 'ID Tramite', 'Nombre', 'Vencimiento', 'Estado', 'Categoria',
+          'Licencia', 'Fecha Nacimiento', 'Nacionalidad', 'Estatura', 'Tipo Sangre', 'Color Ojos',
+          'Foto URL', 'Pais Valido', 'Firma', 'Cedula'])
+      }
+
+      ws.appendRow([
+        data.documento || '', data.id_tramite || '', data.nombre || '',
+        data.vencimiento || '', 'ACTIVA', data.categoria || '',
+        data.licencia_url || '', data.fecha_nacimiento || '', data.nacionalidad || '',
+        data.estatura || '', data.tipo_sangre || '', data.color_ojos || '',
+        data.foto_url || '', data.pais_valido || '', data.firma_url || '',
+        data.cedula_url || ''
+      ])
+
+      return ContentService.createTextOutput(JSON.stringify({ ok: true }))
+        .setMimeType(ContentService.MimeType.JSON)
+    }
+
+    const folder = DriveApp.getFolderById('1sAgajm3yoK2g0Y5w9a1ZqbnJGcWqWcac')
     const ws = sheet.getSheetByName('Aplicantes') || sheet.insertSheet('Aplicantes')
 
     if (ws.getLastRow() === 0) {
@@ -74,9 +140,4 @@ function doPost(e) {
     return ContentService.createTextOutput(JSON.stringify({ ok: false, error: err.toString() }))
       .setMimeType(ContentService.MimeType.JSON)
   }
-}
-
-function doGet() {
-  return ContentService.createTextOutput(JSON.stringify({ ok: true }))
-    .setMimeType(ContentService.MimeType.JSON)
 }

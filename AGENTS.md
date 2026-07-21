@@ -7,7 +7,7 @@
 | **GitHub org** | https://github.com/IAALIO |
 | **GitHub repo** | https://github.com/IAALIO/IAALIO.github.io |
 | **Admin panel** | https://IAALIO.github.io/#admin |
-| **Form API (Apps Script)** | `https://script.google.com/macros/s/AKfycbx0gQ3CD231T3oX69LQ7PJ-JdC7KB4fx0LUKoOdyMiJ93rcwV60gf31mAikekc0vj--/exec` |
+| **Form API (Apps Script)** | `https://script.google.com/macros/s/AKfycbzm2OQuoCRNR7ou9UNtBm96qfewdhb_L270rhZK1x283V1Qi13RE-IzAJKLrRQwDRus/exec` |
 | **CSV público (licencias)** | `https://docs.google.com/spreadsheets/d/e/2PACX-1vQcLOEKNE8N8-dRiH9ZhFxxbpK59mSE8gc-Of1wya6QH6HuOQvs1l6pFnxM35HoUhUsOCI12p03n5YY/pub?output=csv` |
 | **Google Sheet (solicitudes)** | `19tfesoT1l-k9ee2d9R2u-qmUUGNlkrQ-soPcltI21QI` |
 | **Drive folder (fotos)** | `1sAgajm3yoK2g0Y5w9a1ZqbnJGcWqWcac` (IAA-Licencias) |
@@ -23,7 +23,8 @@
 - Workflow: `.github/workflows/deploy.yml`
 - `base: './'` en vite.config.js para rutas relativas
 - `index.html` copiado a `404.html` para SPA routing
-- Variables de entorno (VITE_FORM_API, etc.) definidas en el workflow
+- Variables de entorno (VITE_FORM_API, etc.) definidas en `.github/workflows/deploy.yml` y en `.env`
+- **IMPORTANTE:** `.env` y `.github/workflows/deploy.yml` deben tener el MISMO `VITE_FORM_API`
 - El push necesita token en remote URL: `git remote set-url origin https://USER:TOKEN@github.com/IAALIO/IAALIO.github.io.git`
 
 ## Estructura del Proyecto
@@ -200,10 +201,67 @@ lio-new/
 
 ### Pendiente
 - [ ] Dominio propio (opcional, ~$10/año)
-- [ ] Probar consulta de licencias (depende del CSV)
 - [ ] Revisar T&C con abogado, decidir jurisdicción final
 - [ ] Traducir T&C al inglés completo
 - [ ] Bloquear países de riesgo alto en formulario (opcional)
+
+### Bugs históricos (resueltos)
+- [x] **2026-07-21: Google Sheets CSV DNS failure** - Google DNS (8.8.8.8) dejó de resolver `doc-XX-XX-sheets.googleusercontent.com`.
+      Solución: migrar de CSV a AppsScript + JSONP.
+      `AppsScript.gs`: `doGet(?action=licencias&callback=fn)` sirve JSONP.
+      `SearchLicense.jsx` y `AdminPanel.jsx`: usan `jsonp()` en vez de `fetch(CSV)`.
+
+## CSV DNS Issue (Resuelto)
+
+**Problema:** Google Sheets publicado como CSV redirige a `doc-XX-XX-sheets.googleusercontent.com`
+que los DNS de Google (8.8.8.8) y Cloudflare (1.1.1.1) **no resuelven** (SERVFAIL).
+Quad9 (9.9.9.9) sí lo resuelve correctamente.
+Esto causó que la búsqueda de licencias dejara de funcionar el 21/07/2026.
+
+**Solución:** Reemplazar el CSV por la API de Google Apps Script con JSONP:
+- `AppsScript.gs` → `doGet()` ahora acepta `?action=licencias&callback=Fn`
+  y devuelve JSONP con los datos de la pestaña **Licencias** del sheet `19tfesoT1l...`
+- `doPost()` ahora acepta `action: 'add-license'` para agregar licencias directo al Sheet
+- El frontend usa la función `jsonp()` (crea `<script>` tag dinámico) para evitar CORS
+- AdminPanel ya no copia líneas CSV al portapapeles, envía POST directo al sheet
+
+### Columnas de la pestaña "Licencias" (en sheet 19tfesoT1l...)
+| Header en Sheet | Clave en JSON |
+|----------------|---------------|
+| Documento | documento |
+| ID Tramite | id_tramite |
+| Nombre | nombre |
+| Vencimiento | vencimiento |
+| Estado | estado |
+| Categoria | categoria |
+| Licencia | licencia |
+| Fecha Nacimiento | fecha_nacimiento |
+| Nacionalidad | nacionalidad |
+| Estatura | estatura |
+| Tipo Sangre | tipo_sangre |
+| Color Ojos | color_ojos |
+| Foto URL | foto_url |
+| Pais Valido | pais_valido |
+| Firma | firma |
+| Cedula | cedula |
+
+### Si el DNS de Google vuelve a fallar
+La solución es JSONP + Apps Script, no CSV. Si Google cambia algo:
+1. No tocar el CSV URL - ya no se usa
+2. Verificar que `VITE_FORM_API` apunte al deployment correcto del Apps Script
+3. Probar con `curl -sL -H "Host: doc-10-00-sheets.googleusercontent.com" --resolve "doc-10-00-sheets.googleusercontent.com:443:142.250.154.132" "https://docs.google.com/spreadsheets/d/e/2PACX-1vQcLOEKNE8N8-dRiH9ZhFxxbpK59mSE8gc-Of1wya6QH6HuOQvs1l6pFnxM35HoUhUsOCI12p03n5YY/pub?output=csv"`
+
+## Instrucciones para futuras modificaciones
+1. **Siempre leer AGENTS.md primero** antes de tocar cualquier archivo
+2. **Variables de entorno:** Solo hay 2 activas: `VITE_FORM_API` y `VITE_ADMIN_PASSWORD`
+3. `VITE_CSV_URL` ya **no se usa** - toda la data de licencias viene del AppsScript
+4. **AppsScript** está en `AppsScript.gs` → hay que copiarlo manualmente a `script.google.com`
+5. **Deploy:** `npm run build && git add . && git commit -m "..." && git push`
+6. **Archivos del proyecto lio-new/** son los que están en producción en `iaalio.github.io`
+7. `Lio-web-main/` es la versión vieja, **no modificar**
+8. Si la búsqueda de licencias falla: revisar `VITE_FORM_API` en `.env` y en `.github/workflows/deploy.yml`
+9. Si se modifica `AppsScript.gs`: desplegar nueva versión en script.google.com, copiar URL nueva, actualizar `VITE_FORM_API`
+10. No hardcodear tokens ni contraseñas en el código - usar variables de entorno
 
 ## Comandos útiles
 ```bash
