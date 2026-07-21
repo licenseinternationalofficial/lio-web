@@ -7,7 +7,7 @@
 | **GitHub org** | https://github.com/IAALIO |
 | **GitHub repo** | https://github.com/IAALIO/IAALIO.github.io |
 | **Admin panel** | https://IAALIO.github.io/#admin |
-| **Form API (Apps Script)** | `https://script.google.com/macros/s/AKfycbzm2OQuoCRNR7ou9UNtBm96qfewdhb_L270rhZK1x283V1Qi13RE-IzAJKLrRQwDRus/exec` |
+| **Form API (Apps Script)** | `https://script.google.com/macros/s/AKfycbx0gQ3CD231T3oX69LQ7PJ-JdC7KB4fx0LUKoOdyMiJ93rcwV60gf31mAikekc0vj--/exec` |
 | **CSV público (licencias)** | `https://docs.google.com/spreadsheets/d/e/2PACX-1vQcLOEKNE8N8-dRiH9ZhFxxbpK59mSE8gc-Of1wya6QH6HuOQvs1l6pFnxM35HoUhUsOCI12p03n5YY/pub?output=csv` |
 | **Google Sheet (solicitudes)** | `19tfesoT1l-k9ee2d9R2u-qmUUGNlkrQ-soPcltI21QI` |
 | **Drive folder (fotos)** | `1sAgajm3yoK2g0Y5w9a1ZqbnJGcWqWcac` (IAA-Licencias) |
