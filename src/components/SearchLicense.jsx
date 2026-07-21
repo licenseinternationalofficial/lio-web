@@ -61,8 +61,8 @@ const SearchLicense = () => {
       if (!result.ok || !result.data) { setStatus('not_found'); return }
       const q = docId.trim()
       const found = result.data.find(r =>
-        r.documento === q ||
-        r.id_tramite === q
+        String(r.documento) === q ||
+        String(r.id_tramite) === q
       )
       if (found) {
         setResult({
