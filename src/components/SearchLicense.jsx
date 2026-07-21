@@ -60,9 +60,13 @@ const SearchLicense = () => {
       const result = await jsonp(apiUrl + '?action=licencias')
       if (!result.ok || !result.data) { setStatus('not_found'); return }
       const q = docId.trim()
+      const ql = q.toLowerCase()
       const found = result.data.find(r =>
         String(r.documento) === q ||
-        String(r.id_tramite) === q
+        String(r.id_tramite).toLowerCase() === ql ||
+        String(r.id_tramite).toLowerCase().includes(ql) ||
+        String(r.nombre).toLowerCase().includes(ql) ||
+        String(r.documento).includes(q)
       )
       if (found) {
         setResult({

@@ -1,12 +1,10 @@
 function doGet(e) {
+  const action = e?.parameter?.action || ''
+  const callback = e?.parameter?.callback || ''
   try {
-    const action = e?.parameter?.action || ''
-    const callback = e?.parameter?.callback || ''
-
     if (action === 'licencias') {
       return serveJSONP(callback, getLicencias())
     }
-
     return serveJSONP(callback, { ok: true })
   } catch (err) {
     return serveJSONP(callback, { ok: false, error: err.toString() })
@@ -34,7 +32,17 @@ function getLicencias() {
       const key = String(h).trim()
         .toLowerCase().replace(/[\s]+/g, '_')
         .replace(/[^a-z0-9_]/g, '')
-      obj[key] = i < row.length ? row[i] : ''
+      let val = i < row.length ? row[i] : ''
+      if (val instanceof Date) {
+        const d = val
+        const dd = String(d.getDate()).padStart(2, '0')
+        const mm = String(d.getMonth() + 1).padStart(2, '0')
+        const yyyy = d.getFullYear()
+        val = dd + '/' + mm + '/' + yyyy
+      } else if (typeof val === 'number') {
+        val = String(val)
+      }
+      obj[key] = val
     })
     return obj
   })
