@@ -4,25 +4,6 @@ import { useLang } from '../App'
 
 const FORM_API = import.meta.env.VITE_FORM_API || ''
 
-function jsonp(url) {
-  return new Promise((resolve, reject) => {
-    const cb = 'adm_cb_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7)
-    const separator = url.includes('?') ? '&' : '?'
-    const fullUrl = url + separator + 'callback=' + cb
-    window[cb] = (data) => {
-      delete window[cb]
-      const script = document.querySelector(`script[data-jsonp="${cb}"]`)
-      if (script) script.remove()
-      resolve(data)
-    }
-    const s = document.createElement('script')
-    s.dataset.jsonp = cb
-    s.src = fullUrl
-    s.onerror = () => { delete window[cb]; s.remove(); reject(new Error('JSONP load failed')) }
-    document.body.appendChild(s)
-  })
-}
-
 function getDirectImageUrl(url) {
   if (!url) return ''
   const m = url.match(/\/file\/d\/([^/]+)/)
@@ -50,8 +31,15 @@ const AdminPanel = () => {
   const fetchLicenses = async () => {
     setLoading(true)
     try {
-      if (!FORM_API) { setLicenses([]); setLoading(false); return }
-      const result = await jsonp(FORM_API + '?action=licencias')
+      let result
+      try {
+        const r = await fetch('./data/licencias.json')
+        result = await r.json()
+      } catch {
+        if (!FORM_API) { setLicenses([]); setLoading(false); return }
+        const r = await fetch(FORM_API + '?action=licencias')
+        result = await r.json()
+      }
       if (result.ok && result.data) {
         setLicenses(result.data.map(r => ({
           id: r.documento || '',

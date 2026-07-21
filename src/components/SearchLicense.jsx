@@ -9,32 +9,6 @@ import fiaLogo from '../assets/images/fia-logo.png'
 
 const FORM_API = import.meta.env.VITE_FORM_API || ''
 
-function jsonp(url) {
-  return new Promise((resolve, reject) => {
-    const cb = 'lic_cb_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7)
-    const separator = url.includes('?') ? '&' : '?'
-    const fullUrl = url + separator + 'callback=' + cb
-    const timer = setTimeout(() => {
-      delete window[cb]
-      const script = document.querySelector(`script[data-jsonp="${cb}"]`)
-      if (script) script.remove()
-      reject(new Error('JSONP timeout'))
-    }, 10000)
-    window[cb] = (data) => {
-      clearTimeout(timer)
-      delete window[cb]
-      const script = document.querySelector(`script[data-jsonp="${cb}"]`)
-      if (script) script.remove()
-      resolve(data)
-    }
-    const s = document.createElement('script')
-    s.dataset.jsonp = cb
-    s.src = fullUrl
-    s.onerror = () => { clearTimeout(timer); delete window[cb]; s.remove(); reject(new Error('JSONP load failed')) }
-    document.body.appendChild(s)
-  })
-}
-
 function getDirectImageUrl(url) {
   if (!url) return ''
   const m = url.match(/\/file\/d\/([^/]+)/)
@@ -57,14 +31,25 @@ const SearchLicense = () => {
   const [status, setStatus] = useState('idle')
   const [result, setResult] = useState(null)
 
+  async function fetchData() {
+    const r = await fetch('./data/licencias.json')
+    return r.json()
+  }
+
   const handleSearch = async (e) => {
     e.preventDefault()
     if (!docId) return
     setStatus('loading')
     try {
-      const apiUrl = FORM_API || ''
-      if (!apiUrl) { setStatus('not_found'); return }
-      const result = await jsonp(apiUrl + '?action=licencias')
+      let result
+      try {
+        result = await fetchData()
+      } catch {
+        const apiUrl = FORM_API || ''
+        if (!apiUrl) throw new Error('no api')
+        const res = await fetch(apiUrl + '?action=licencias')
+        result = await res.json()
+      }
       if (!result.ok || !result.data) { setStatus('not_found'); return }
       const q = docId.trim()
       const ql = q.toLowerCase()
